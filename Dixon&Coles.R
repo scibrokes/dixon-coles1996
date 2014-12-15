@@ -1,3 +1,4 @@
+library(shiny)
 library(fbRanks)
 library(XML)
 library(plyr)
@@ -41,8 +42,13 @@ md3.att <- coef(md3$fit$cluster.1)[1:nrow(md3$teams)]
 md3.def <- coef(md3$fit$cluster.1)[seq(nrow(md3$teams)+2,nrow(md3$teams)*2)-1]
 md3.hdv <- coef(md3$fit$cluster.1)[-seq(nrow(md3$teams)*2)+1]
 
+# ========================
 # to be continue
 sim <- simulate(md1)
 predict(sim)
+
 # apply anova to compare the models
+
+# run shiny apps
+runApp('Myapp', display.mode="showcase")
 
