@@ -15,17 +15,18 @@ scores <- Reduce(function(x, y) merge(x, y, all = T),
 scores$HG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[1])))
 scores$AG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[2])))
 scores$V3 <- NULL
-names(scores) <- c('scores','home.team','away.team','venue','home.scores','away.scores')
-scores$scores <- unlist(lapply(str_split(scores$scores,' '),function(x) paste(x[-1],collapse='')))
-scores$scores <- as.Date(scores$scores, "%d%B%Y")
+names(scores) <- c('date','home.team','away.team','venue','home.score','away.score')
+scores$date <- unlist(lapply(str_split(scores$date,' '),function(x) paste(x[-1],collapse='')))
+scores$date <- as.Date(scores$date, "%d%B%Y")
 attr(scores$home.team,'levels') <- levels(factor(scores$home.team))
 attr(scores$away.team,'levels') <- levels(factor(scores$away.team))
 scores$venue <- as.character(scores$venue)
+teams <- scores[order(scores$date, decreasing=T) & !duplicated(scores$venue),][c('home.team','venue')]
+names(teams)[1] <- 'name'
 scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1, 0) # scoresa error:only 33 matches home ground among 380 matches
-
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
-rm(url, tbl)
+rm(url, tbl, teams)
 save(scores, file='scores.Rda')
 write.csv(scores,'scores.csv')
 
