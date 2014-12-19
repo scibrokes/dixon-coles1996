@@ -214,8 +214,14 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir &lt;- paste0(getwd(), &quot;/GitHub/englianhu/Dixon-Coles1996&quot;)
+setwd(mydir)
+</code></pre>
 
-# get the English Premier League 2013/2014 from official website
+<pre><code>Error in setwd(mydir): cannot change working directory
+</code></pre>
+
+<pre><code class="r"># get the English Premier League 2013/2014 from official website
 url = getURL(&quot;http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&amp;paramComp_8=true&amp;paramSeason=2013-2014&amp;view=.scoresSeason&quot;)
 tbl &lt;- readHTMLTable(htmlParse(url), header = &quot;text&quot;)
 tbl[[length(tbl)]] &lt;- NULL
@@ -257,8 +263,14 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir &lt;- paste0(getwd(), &quot;/GitHub/englianhu/Dixon-Coles1996&quot;)
+setwd(mydir)
+</code></pre>
 
-# Load soccer matches scoresa
+<pre><code>Error in setwd(mydir): cannot change working directory
+</code></pre>
+
+<pre><code class="r"># Load soccer matches scoresa
 load(&quot;~/scores.Rda&quot;)
 # scores &lt;- read.csv(&#39;scores.csv&#39;)
 scores &lt;- create.fbRanks.dataframes(&quot;scores.csv&quot;)
@@ -353,27 +365,48 @@ sim1 &lt;- simulate(md1)
 </code></pre>
 
 <pre><code>
-               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th 14th 15th 16th 17th 18th 19th 20th
-Liverpool       18  38  30  10   3   1   0   0   0    0    0    0    0    0    0    0    0    0    0    0
-Norwich          0   0   0   0   0   0   0   0   0    0    0    1    1    2    4    6   11   19   26   29
-Sunderland       0   0   0   0   0   0   1   2   4    6    8   10   11   12   12   12   10    7    4    2
-West Brom        0   0   0   0   0   0   1   3   6    9   10   12   12   12   11    9    7    5    2    1
-Arsenal          1   5  13  30  24  15   7   3   1    0    0    0    0    0    0    0    0    0    0    0
-Swansea          0   0   0   1   3   7  14  18  18   13    9    6    4    3    2    1    1    0    0    0
-West Ham         0   0   0   0   0   1   2   5   8   11   12   12   12   11    9    8    6    3    2    1
-Crystal Palace   0   0   0   0   0   0   1   1   3    5    7    9   11   12   12   13   11    8    5    2
-Chelsea         13  32  35  13   5   2   0   0   0    0    0    0    0    0    0    0    0    0    0    0
-Man City        67  22   8   2   0   0   0   0   0    0    0    0    0    0    0    0    0    0    0    0
-Fulham           0   0   0   0   0   0   0   0   0    0    1    1    2    3    5    8   13   20   24   23
-Hull             0   0   0   0   0   0   1   2   4    7    9   11   12   12   12   11    9    6    3    1
-Southampton      0   0   1   3   8  15  22  19  13    8    5    3    2    1    1    0    0    0    0    0
-Aston Villa      0   0   0   0   0   0   0   1   2    4    6    8    9   11   13   13   13   10    6    3
-Everton          0   2   7  20  25  22  12   6   3    1    0    0    0    0    0    0    0    0    0    0
-Newcastle        0   0   0   0   0   0   1   3   6    9   10   12   12   11   11    9    7    5    2    1
-Stoke            0   0   0   0   1   2   5   9  13   15   14   11    9    7    5    4    3    1    1    0
-Cardiff          0   0   0   0   0   0   0   0   0    0    0    1    1    2    3    5    9   16   26   37
-Spurs            0   0   0   2   5  11  18  20  16   10    7    4    3    2    1    1    0    0    0    0
-Man Utd          0   2   6  19  25  23  13   7   3    1    1    0    0    0    0    0    0    0    0    0
+               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th
+Liverpool       18  38  29  10   3   1   0   0   0    0    0    0    0
+Norwich          0   0   0   0   0   0   0   0   0    0    0    1    1
+Sunderland       0   0   0   0   0   0   1   2   4    6    8   10   11
+West Brom        0   0   0   0   0   0   1   3   6    9   11   12   12
+Arsenal          1   4  13  30  24  16   7   3   1    0    0    0    0
+Swansea          0   0   0   1   3   7  14  18  18   13    9    6    4
+West Ham         0   0   0   0   0   1   2   4   8   11   12   12   12
+Crystal Palace   0   0   0   0   0   0   1   1   3    5    7    9   11
+Chelsea         13  32  35  13   5   2   0   0   0    0    0    0    0
+Man City        67  22   8   2   0   0   0   0   0    0    0    0    0
+Fulham           0   0   0   0   0   0   0   0   0    0    1    1    2
+Hull             0   0   0   0   0   0   1   2   4    7    9   11   12
+Southampton      0   0   1   3   8  15  22  19  13    8    5    3    2
+Aston Villa      0   0   0   0   0   0   0   1   2    4    6    8    9
+Everton          0   2   7  20  25  22  12   6   3    1    0    0    0
+Newcastle        0   0   0   0   0   0   1   3   6    9   11   12   12
+Stoke            0   0   0   0   1   2   5   9  13   15   14   11    9
+Cardiff          0   0   0   0   0   0   0   0   0    0    0    1    1
+Spurs            0   0   0   2   5  11  18  20  16   10    7    4    3
+Man Utd          0   2   6  19  25  23  13   7   3    1    1    0    0
+               14th 15th 16th 17th 18th 19th 20th
+Liverpool         0    0    0    0    0    0    0
+Norwich           2    4    6   11   19   26   29
+Sunderland       12   12   12   10    7    4    2
+West Brom        11   11    9    7    5    2    1
+Arsenal           0    0    0    0    0    0    0
+Swansea           3    2    1    1    0    0    0
+West Ham         11    9    7    5    3    2    0
+Crystal Palace   12   13   13   11    8    5    2
+Chelsea           0    0    0    0    0    0    0
+Man City          0    0    0    0    0    0    0
+Fulham            3    5    8   13   20   24   23
+Hull             12   12   11    9    6    3    1
+Southampton       1    1    0    0    0    0    0
+Aston Villa      11   13   14   13   10    6    3
+Everton           0    0    0    0    0    0    0
+Newcastle        12   11    9    7    4    2    1
+Stoke             7    6    4    3    1    1    0
+Cardiff           2    3    5    9   16   26   38
+Spurs             2    1    1    0    0    0    0
+Man Utd           0    0    0    0    0    0    0
 </code></pre>
 
 <pre><code class="r">predict(md1, date = as.Date(max(scores$scores$date)))
@@ -382,16 +415,16 @@ Man Utd          0   2   6  19  25  23  13   7   3    1    1    0    0    0    0
 <pre><code>Predicted Match Results for 1900-05-01 to 2100-06-01
 Model based on data from 2013-08-17 to 2014-05-11
 ---------------------------------------------
-2014-05-11 Cardiff vs Chelsea, HW 5%, AW 83%, T 13%, pred score 0.4-2.5  actual: AW (1-2)
-2014-05-11 Fulham vs Crystal Palace, HW 27%, AW 46%, T 27%, pred score 1-1.4  actual: T (2-2)
+2014-05-11 Cardiff vs Chelsea, HW 5%, AW 82%, T 13%, pred score 0.4-2.5  actual: AW (1-2)
+2014-05-11 Fulham vs Crystal Palace, HW 26%, AW 46%, T 27%, pred score 1-1.4  actual: T (2-2)
 2014-05-11 Hull vs Everton, HW 18%, AW 57%, T 25%, pred score 0.7-1.6  actual: AW (0-2)
-2014-05-11 Liverpool vs Newcastle, HW 74%, AW 11%, T 14%, pred score 3-1.1  actual: HW (2-1)
-2014-05-11 Man City vs West Ham, HW 75%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
-2014-05-11 Norwich vs Arsenal, HW 10%, AW 72%, T 19%, pred score 0.6-2  actual: AW (0-2)
+2014-05-11 Liverpool vs Newcastle, HW 74%, AW 12%, T 14%, pred score 3-1.1  actual: HW (2-1)
+2014-05-11 Man City vs West Ham, HW 76%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
+2014-05-11 Norwich vs Arsenal, HW 10%, AW 71%, T 19%, pred score 0.6-2  actual: AW (0-2)
 2014-05-11 Southampton vs Man Utd, HW 30%, AW 44%, T 26%, pred score 1.2-1.5  actual: T (1-1)
-2014-05-11 Spurs vs Aston Villa, HW 53%, AW 23%, T 24%, pred score 1.7-1  actual: HW (3-0)
+2014-05-11 Spurs vs Aston Villa, HW 53%, AW 23%, T 25%, pred score 1.7-1  actual: HW (3-0)
 2014-05-11 Sunderland vs Swansea, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
-2014-05-11 West Brom vs Stoke, HW 32%, AW 41%, T 27%, pred score 1.1-1.3  actual: AW (1-2)
+2014-05-11 West Brom vs Stoke, HW 31%, AW 41%, T 27%, pred score 1.1-1.3  actual: AW (1-2)
 </code></pre>
 
 <pre><code class="r">pr1 &lt;- predict(md1)
@@ -407,89 +440,89 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-08-17 Arsenal vs Aston Villa, HW 66%, AW 14%, T 20%, pred score 2-0.8  actual: AW (1-3)
 2013-08-17 Swansea vs Man Utd, HW 26%, AW 50%, T 24%, pred score 1.2-1.7  actual: AW (1-4)
 2013-08-17 West Ham vs Cardiff, HW 52%, AW 21%, T 27%, pred score 1.5-0.8  actual: HW (2-0)
-2013-08-18 Crystal Palace vs Spurs, HW 24%, AW 47%, T 29%, pred score 0.8-1.3  actual: AW (0-1)
+2013-08-18 Crystal Palace vs Spurs, HW 24%, AW 47%, T 28%, pred score 0.8-1.3  actual: AW (0-1)
 2013-08-18 Chelsea vs Hull, HW 69%, AW 10%, T 21%, pred score 1.8-0.5  actual: HW (2-0)
 2013-08-19 Man City vs Newcastle, HW 80%, AW 8%, T 12%, pred score 3-0.8  actual: HW (4-0)
 2013-08-21 Chelsea vs Aston Villa, HW 74%, AW 8%, T 18%, pred score 2.1-0.5  actual: HW (2-1)
-2013-08-24 Fulham vs Arsenal, HW 9%, AW 78%, T 13%, pred score 0.9-2.8  actual: AW (1-3)
+2013-08-24 Fulham vs Arsenal, HW 8%, AW 78%, T 13%, pred score 0.9-2.8  actual: AW (1-3)
 2013-08-24 Hull vs Norwich, HW 46%, AW 23%, T 31%, pred score 1.2-0.7  actual: HW (1-0)
-2013-08-24 Southampton vs Sunderland, HW 52%, AW 23%, T 25%, pred score 1.6-1  actual: T (1-1)
-2013-08-24 Aston Villa vs Liverpool, HW 9%, AW 78%, T 13%, pred score 1-3  actual: AW (0-1)
+2013-08-24 Southampton vs Sunderland, HW 52%, AW 22%, T 25%, pred score 1.6-1  actual: T (1-1)
+2013-08-24 Aston Villa vs Liverpool, HW 10%, AW 77%, T 13%, pred score 1-3  actual: AW (0-1)
 2013-08-24 Everton vs West Brom, HW 59%, AW 18%, T 23%, pred score 1.8-0.9  actual: T (0-0)
-2013-08-24 Newcastle vs West Ham, HW 34%, AW 38%, T 28%, pred score 1.1-1.2  actual: T (0-0)
-2013-08-24 Stoke vs Crystal Palace, HW 40%, AW 28%, T 32%, pred score 1.1-0.8  actual: HW (2-1)
+2013-08-24 Newcastle vs West Ham, HW 34%, AW 38%, T 29%, pred score 1.1-1.2  actual: T (0-0)
+2013-08-24 Stoke vs Crystal Palace, HW 40%, AW 29%, T 32%, pred score 1.1-0.8  actual: HW (2-1)
 2013-08-25 Cardiff vs Man City, HW 3%, AW 90%, T 7%, pred score 0.6-3.7  actual: HW (3-2)
 2013-08-25 Spurs vs Swansea, HW 40%, AW 35%, T 25%, pred score 1.5-1.4  actual: HW (1-0)
 2013-08-26 Man Utd vs Chelsea, HW 22%, AW 52%, T 26%, pred score 0.9-1.5  actual: T (0-0)
-2013-08-31 Cardiff vs Everton, HW 9%, AW 73%, T 18%, pred score 0.6-2.2  actual: T (0-0)
+2013-08-31 Cardiff vs Everton, HW 10%, AW 73%, T 18%, pred score 0.6-2.2  actual: T (0-0)
 2013-08-31 Man City vs Hull, HW 78%, AW 8%, T 14%, pred score 2.6-0.7  actual: HW (2-0)
 2013-08-31 Norwich vs Southampton, HW 15%, AW 61%, T 24%, pred score 0.7-1.6  actual: HW (1-0)
-2013-08-31 Crystal Palace vs Sunderland, HW 34%, AW 35%, T 31%, pred score 1-1  actual: HW (3-1)
-2013-08-31 Newcastle vs Fulham, HW 52%, AW 25%, T 23%, pred score 1.8-1.2  actual: HW (1-0)
-2013-08-31 West Ham vs Stoke, HW 32%, AW 38%, T 30%, pred score 1-1.1  actual: AW (0-1)
-2013-09-01 Liverpool vs Man Utd, HW 50%, AW 29%, T 21%, pred score 2.2-1.7  actual: HW (1-0)
+2013-08-31 Crystal Palace vs Sunderland, HW 35%, AW 34%, T 31%, pred score 1-1  actual: HW (3-1)
+2013-08-31 Newcastle vs Fulham, HW 51%, AW 25%, T 23%, pred score 1.8-1.2  actual: HW (1-0)
+2013-08-31 West Ham vs Stoke, HW 33%, AW 38%, T 29%, pred score 1-1.1  actual: AW (0-1)
+2013-09-01 Liverpool vs Man Utd, HW 50%, AW 30%, T 21%, pred score 2.2-1.7  actual: HW (1-0)
 2013-09-01 West Brom vs Swansea, HW 28%, AW 47%, T 25%, pred score 1.2-1.6  actual: AW (0-2)
 2013-09-01 Arsenal vs Spurs, HW 51%, AW 25%, T 24%, pred score 1.7-1.1  actual: HW (1-0)
-2013-09-14 Fulham vs West Brom, HW 25%, AW 51%, T 23%, pred score 1.2-1.8  actual: T (1-1)
+2013-09-14 Fulham vs West Brom, HW 26%, AW 52%, T 23%, pred score 1.2-1.8  actual: T (1-1)
 2013-09-14 Hull vs Cardiff, HW 49%, AW 23%, T 28%, pred score 1.4-0.9  actual: T (1-1)
 2013-09-14 Spurs vs Norwich, HW 60%, AW 16%, T 24%, pred score 1.7-0.7  actual: HW (2-0)
 2013-09-14 Sunderland vs Arsenal, HW 15%, AW 64%, T 21%, pred score 0.9-2  actual: AW (1-3)
 2013-09-14 Man Utd vs Crystal Palace, HW 56%, AW 18%, T 26%, pred score 1.5-0.7  actual: HW (2-0)
 2013-09-14 Aston Villa vs Newcastle, HW 33%, AW 40%, T 27%, pred score 1.2-1.3  actual: AW (1-2)
-2013-09-14 Everton vs Chelsea, HW 23%, AW 49%, T 28%, pred score 0.8-1.4  actual: HW (1-0)
+2013-09-14 Everton vs Chelsea, HW 23%, AW 50%, T 28%, pred score 0.8-1.4  actual: HW (1-0)
 2013-09-14 Stoke vs Man City, HW 10%, AW 74%, T 15%, pred score 0.9-2.6  actual: T (0-0)
-2013-09-15 Southampton vs West Ham, HW 46%, AW 26%, T 28%, pred score 1.4-0.9  actual: T (0-0)
+2013-09-15 Southampton vs West Ham, HW 47%, AW 26%, T 28%, pred score 1.4-0.9  actual: T (0-0)
 2013-09-16 Swansea vs Liverpool, HW 18%, AW 65%, T 17%, pred score 1.4-2.7  actual: T (2-2)
-2013-09-21 Liverpool vs Southampton, HW 58%, AW 23%, T 19%, pred score 2.3-1.4  actual: AW (0-1)
+2013-09-21 Liverpool vs Southampton, HW 58%, AW 22%, T 20%, pred score 2.3-1.4  actual: AW (0-1)
 2013-09-21 Norwich vs Aston Villa, HW 26%, AW 44%, T 30%, pred score 0.9-1.2  actual: AW (0-1)
-2013-09-21 West Brom vs Sunderland, HW 39%, AW 35%, T 27%, pred score 1.3-1.2  actual: HW (3-0)
+2013-09-21 West Brom vs Sunderland, HW 38%, AW 35%, T 27%, pred score 1.3-1.2  actual: HW (3-0)
 2013-09-21 Chelsea vs Fulham, HW 85%, AW 5%, T 11%, pred score 2.9-0.6  actual: HW (2-0)
 2013-09-21 Newcastle vs Hull, HW 36%, AW 35%, T 29%, pred score 1.1-1.1  actual: AW (2-3)
 2013-09-21 West Ham vs Everton, HW 19%, AW 55%, T 26%, pred score 0.8-1.5  actual: AW (2-3)
-2013-09-22 Cardiff vs Spurs, HW 15%, AW 64%, T 21%, pred score 0.8-2  actual: AW (0-1)
+2013-09-22 Cardiff vs Spurs, HW 15%, AW 65%, T 21%, pred score 0.8-2  actual: AW (0-1)
 2013-09-22 Man City vs Man Utd, HW 59%, AW 21%, T 20%, pred score 2.2-1.2  actual: HW (4-1)
 2013-09-22 Crystal Palace vs Swansea, HW 26%, AW 45%, T 29%, pred score 0.9-1.3  actual: AW (0-2)
 2013-09-22 Arsenal vs Stoke, HW 56%, AW 20%, T 24%, pred score 1.7-0.9  actual: HW (3-1)
-2013-09-28 Fulham vs Cardiff, HW 40%, AW 35%, T 25%, pred score 1.5-1.4  actual: AW (1-2)
-2013-09-28 Hull vs West Ham, HW 33%, AW 37%, T 31%, pred score 1-1  actual: HW (1-0)
+2013-09-28 Fulham vs Cardiff, HW 41%, AW 35%, T 25%, pred score 1.5-1.4  actual: AW (1-2)
+2013-09-28 Hull vs West Ham, HW 32%, AW 37%, T 31%, pred score 1-1  actual: HW (1-0)
 2013-09-28 Southampton vs Crystal Palace, HW 48%, AW 22%, T 29%, pred score 1.3-0.8  actual: HW (2-0)
-2013-09-28 Spurs vs Chelsea, HW 16%, AW 62%, T 23%, pred score 0.8-1.8  actual: T (1-1)
+2013-09-28 Spurs vs Chelsea, HW 15%, AW 62%, T 23%, pred score 0.8-1.8  actual: T (1-1)
 2013-09-28 Man Utd vs West Brom, HW 59%, AW 19%, T 22%, pred score 1.9-0.9  actual: AW (1-2)
 2013-09-28 Aston Villa vs Man City, HW 6%, AW 82%, T 11%, pred score 0.8-3  actual: HW (3-2)
-2013-09-28 Swansea vs Arsenal, HW 23%, AW 54%, T 23%, pred score 1.1-1.8  actual: AW (1-2)
-2013-09-29 Sunderland vs Liverpool, HW 10%, AW 76%, T 14%, pred score 1.1-3  actual: AW (1-3)
+2013-09-28 Swansea vs Arsenal, HW 24%, AW 54%, T 23%, pred score 1.1-1.8  actual: AW (1-2)
+2013-09-29 Sunderland vs Liverpool, HW 11%, AW 76%, T 14%, pred score 1.1-3  actual: AW (1-3)
 2013-09-29 Stoke vs Norwich, HW 52%, AW 20%, T 28%, pred score 1.4-0.7  actual: AW (0-1)
 2013-09-30 Everton vs Newcastle, HW 59%, AW 18%, T 23%, pred score 1.8-0.9  actual: HW (3-2)
 2013-10-05 Cardiff vs Newcastle, HW 23%, AW 52%, T 25%, pred score 1-1.6  actual: AW (1-2)
 2013-10-05 Fulham vs Stoke, HW 21%, AW 57%, T 22%, pred score 1.1-1.9  actual: HW (1-0)
-2013-10-05 Hull vs Aston Villa, HW 38%, AW 32%, T 29%, pred score 1.1-1  actual: T (0-0)
+2013-10-05 Hull vs Aston Villa, HW 39%, AW 32%, T 29%, pred score 1.1-1  actual: T (0-0)
 2013-10-05 Liverpool vs Crystal Palace, HW 71%, AW 12%, T 17%, pred score 2.4-0.9  actual: HW (3-1)
 2013-10-05 Man City vs Everton, HW 56%, AW 22%, T 21%, pred score 2-1.2  actual: HW (3-1)
-2013-10-05 Sunderland vs Man Utd, HW 18%, AW 61%, T 22%, pred score 0.9-1.9  actual: AW (1-2)
-2013-10-06 Norwich vs Chelsea, HW 6%, AW 78%, T 16%, pred score 0.4-2.1  actual: AW (1-3)
+2013-10-05 Sunderland vs Man Utd, HW 17%, AW 60%, T 22%, pred score 0.9-1.9  actual: AW (1-2)
+2013-10-06 Norwich vs Chelsea, HW 6%, AW 78%, T 17%, pred score 0.4-2.1  actual: AW (1-3)
 2013-10-06 Southampton vs Swansea, HW 42%, AW 32%, T 26%, pred score 1.5-1.2  actual: HW (2-0)
 2013-10-06 Spurs vs West Ham, HW 45%, AW 28%, T 27%, pred score 1.4-1  actual: AW (0-3)
-2013-10-06 West Brom vs Arsenal, HW 17%, AW 62%, T 21%, pred score 0.9-2  actual: T (1-1)
+2013-10-06 West Brom vs Arsenal, HW 16%, AW 62%, T 21%, pred score 0.9-2  actual: T (1-1)
 2013-10-19 Man Utd vs Southampton, HW 44%, AW 30%, T 26%, pred score 1.5-1.2  actual: T (1-1)
-2013-10-19 Arsenal vs Norwich, HW 72%, AW 9%, T 19%, pred score 2-0.6  actual: HW (4-1)
-2013-10-19 Chelsea vs Cardiff, HW 83%, AW 5%, T 13%, pred score 2.5-0.4  actual: HW (4-1)
+2013-10-19 Arsenal vs Norwich, HW 72%, AW 10%, T 19%, pred score 2-0.6  actual: HW (4-1)
+2013-10-19 Chelsea vs Cardiff, HW 82%, AW 5%, T 13%, pred score 2.5-0.4  actual: HW (4-1)
 2013-10-19 Everton vs Hull, HW 57%, AW 18%, T 25%, pred score 1.6-0.7  actual: HW (2-1)
 2013-10-19 Newcastle vs Liverpool, HW 12%, AW 74%, T 14%, pred score 1.1-3  actual: T (2-2)
 2013-10-19 Stoke vs West Brom, HW 41%, AW 31%, T 27%, pred score 1.3-1.1  actual: T (0-0)
-2013-10-19 Swansea vs Sunderland, HW 49%, AW 26%, T 25%, pred score 1.6-1.1  actual: HW (4-0)
+2013-10-19 Swansea vs Sunderland, HW 49%, AW 27%, T 25%, pred score 1.6-1.1  actual: HW (4-0)
 2013-10-19 West Ham vs Man City, HW 9%, AW 75%, T 15%, pred score 0.8-2.5  actual: AW (1-3)
-2013-10-20 Aston Villa vs Spurs, HW 23%, AW 53%, T 25%, pred score 1-1.7  actual: AW (0-2)
-2013-10-21 Crystal Palace vs Fulham, HW 46%, AW 26%, T 27%, pred score 1.4-1  actual: AW (1-4)
+2013-10-20 Aston Villa vs Spurs, HW 23%, AW 53%, T 24%, pred score 1-1.7  actual: AW (0-2)
+2013-10-21 Crystal Palace vs Fulham, HW 47%, AW 26%, T 27%, pred score 1.4-1  actual: AW (1-4)
 2013-10-26 Liverpool vs West Brom, HW 74%, AW 12%, T 14%, pred score 3-1.1  actual: HW (4-1)
-2013-10-26 Norwich vs Cardiff, HW 36%, AW 34%, T 30%, pred score 1-1  actual: T (0-0)
+2013-10-26 Norwich vs Cardiff, HW 35%, AW 34%, T 31%, pred score 1-1  actual: T (0-0)
 2013-10-26 Southampton vs Fulham, HW 67%, AW 15%, T 19%, pred score 2.3-1  actual: HW (2-0)
 2013-10-26 Man Utd vs Stoke, HW 53%, AW 23%, T 25%, pred score 1.6-1  actual: HW (3-2)
 2013-10-26 Crystal Palace vs Arsenal, HW 16%, AW 59%, T 25%, pred score 0.7-1.6  actual: AW (0-2)
 2013-10-26 Aston Villa vs Everton, HW 15%, AW 62%, T 22%, pred score 0.8-1.8  actual: AW (0-2)
 2013-10-27 Spurs vs Hull, HW 48%, AW 26%, T 27%, pred score 1.4-1  actual: HW (1-0)
-2013-10-27 Sunderland vs Newcastle, HW 35%, AW 38%, T 27%, pred score 1.2-1.3  actual: HW (2-1)
+2013-10-27 Sunderland vs Newcastle, HW 34%, AW 39%, T 27%, pred score 1.2-1.3  actual: HW (2-1)
 2013-10-27 Chelsea vs Man City, HW 36%, AW 38%, T 26%, pred score 1.4-1.4  actual: HW (2-1)
-2013-10-27 Swansea vs West Ham, HW 43%, AW 30%, T 27%, pred score 1.4-1.1  actual: T (0-0)
+2013-10-27 Swansea vs West Ham, HW 43%, AW 29%, T 27%, pred score 1.4-1.1  actual: T (0-0)
 2013-11-02 Fulham vs Man Utd, HW 10%, AW 75%, T 15%, pred score 0.9-2.7  actual: AW (1-3)
 2013-11-02 Hull vs Sunderland, HW 37%, AW 34%, T 29%, pred score 1.1-1.1  actual: HW (1-0)
 2013-11-02 Man City vs Norwich, HW 86%, AW 4%, T 10%, pred score 3.1-0.6  actual: HW (7-0)
@@ -498,11 +531,11 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-11-02 Newcastle vs Chelsea, HW 10%, AW 71%, T 19%, pred score 0.6-2  actual: HW (2-0)
 2013-11-02 Stoke vs Southampton, HW 28%, AW 45%, T 27%, pred score 1-1.4  actual: T (1-1)
 2013-11-02 West Ham vs Aston Villa, HW 41%, AW 30%, T 29%, pred score 1.2-1  actual: T (0-0)
-2013-11-03 Cardiff vs Swansea, HW 16%, AW 63%, T 21%, pred score 0.9-2  actual: HW (1-0)
-2013-11-03 Everton vs Spurs, HW 48%, AW 27%, T 25%, pred score 1.5-1.1  actual: T (0-0)
-2013-11-09 Liverpool vs Fulham, HW 88%, AW 5%, T 7%, pred score 4.3-1.1  actual: HW (4-0)
+2013-11-03 Cardiff vs Swansea, HW 16%, AW 62%, T 21%, pred score 0.9-2  actual: HW (1-0)
+2013-11-03 Everton vs Spurs, HW 48%, AW 26%, T 26%, pred score 1.5-1.1  actual: T (0-0)
+2013-11-09 Liverpool vs Fulham, HW 89%, AW 5%, T 7%, pred score 4.3-1.1  actual: HW (4-0)
 2013-11-09 Norwich vs West Ham, HW 22%, AW 48%, T 30%, pred score 0.7-1.2  actual: HW (3-1)
-2013-11-09 Southampton vs Hull, HW 49%, AW 23%, T 27%, pred score 1.4-0.9  actual: HW (4-1)
+2013-11-09 Southampton vs Hull, HW 49%, AW 24%, T 27%, pred score 1.4-0.9  actual: HW (4-1)
 2013-11-09 Crystal Palace vs Everton, HW 17%, AW 56%, T 27%, pred score 0.6-1.4  actual: T (0-0)
 2013-11-09 Chelsea vs West Brom, HW 71%, AW 10%, T 19%, pred score 2-0.6  actual: T (2-2)
 2013-11-09 Aston Villa vs Cardiff, HW 47%, AW 26%, T 27%, pred score 1.4-1  actual: HW (2-0)
@@ -510,28 +543,28 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-11-10 Sunderland vs Man City, HW 7%, AW 81%, T 12%, pred score 0.8-3  actual: HW (1-0)
 2013-11-10 Man Utd vs Arsenal, HW 34%, AW 41%, T 25%, pred score 1.3-1.5  actual: HW (1-0)
 2013-11-10 Swansea vs Stoke, HW 41%, AW 33%, T 26%, pred score 1.4-1.2  actual: T (3-3)
-2013-11-23 Fulham vs Swansea, HW 18%, AW 63%, T 19%, pred score 1.1-2.3  actual: AW (1-2)
-2013-11-23 Hull vs Crystal Palace, HW 34%, AW 32%, T 33%, pred score 0.9-0.9  actual: AW (0-1)
-2013-11-23 Arsenal vs Southampton, HW 47%, AW 27%, T 25%, pred score 1.6-1.1  actual: HW (2-0)
-2013-11-23 Everton vs Liverpool, HW 31%, AW 48%, T 22%, pred score 1.6-2  actual: T (3-3)
-2013-11-23 Newcastle vs Norwich, HW 48%, AW 23%, T 28%, pred score 1.3-0.8  actual: HW (2-1)
+2013-11-23 Fulham vs Swansea, HW 17%, AW 63%, T 19%, pred score 1.1-2.3  actual: AW (1-2)
+2013-11-23 Hull vs Crystal Palace, HW 34%, AW 33%, T 33%, pred score 0.9-0.9  actual: AW (0-1)
+2013-11-23 Arsenal vs Southampton, HW 47%, AW 28%, T 25%, pred score 1.6-1.1  actual: HW (2-0)
+2013-11-23 Everton vs Liverpool, HW 31%, AW 47%, T 22%, pred score 1.6-2  actual: T (3-3)
+2013-11-23 Newcastle vs Norwich, HW 48%, AW 24%, T 28%, pred score 1.3-0.8  actual: HW (2-1)
 2013-11-23 Stoke vs Sunderland, HW 43%, AW 30%, T 27%, pred score 1.3-1.1  actual: HW (2-0)
 2013-11-23 West Ham vs Chelsea, HW 11%, AW 67%, T 22%, pred score 0.5-1.7  actual: AW (0-3)
 2013-11-24 Cardiff vs Man Utd, HW 10%, AW 73%, T 17%, pred score 0.7-2.3  actual: T (2-2)
-2013-11-24 Man City vs Spurs, HW 70%, AW 13%, T 17%, pred score 2.6-1.1  actual: HW (6-0)
+2013-11-24 Man City vs Spurs, HW 70%, AW 14%, T 16%, pred score 2.6-1.1  actual: HW (6-0)
 2013-11-25 West Brom vs Aston Villa, HW 40%, AW 33%, T 27%, pred score 1.3-1.2  actual: T (2-2)
-2013-11-30 Cardiff vs Arsenal, HW 8%, AW 76%, T 16%, pred score 0.7-2.4  actual: AW (0-3)
+2013-11-30 Cardiff vs Arsenal, HW 8%, AW 76%, T 15%, pred score 0.7-2.4  actual: AW (0-3)
 2013-11-30 Norwich vs Crystal Palace, HW 24%, AW 42%, T 34%, pred score 0.7-1  actual: HW (1-0)
 2013-11-30 Aston Villa vs Sunderland, HW 34%, AW 38%, T 27%, pred score 1.2-1.2  actual: T (0-0)
 2013-11-30 Everton vs Stoke, HW 53%, AW 21%, T 26%, pred score 1.6-0.9  actual: HW (4-0)
-2013-11-30 Newcastle vs West Brom, HW 37%, AW 37%, T 27%, pred score 1.3-1.3  actual: HW (2-1)
-2013-11-30 West Ham vs Fulham, HW 52%, AW 23%, T 24%, pred score 1.7-1  actual: HW (3-0)
-2013-12-01 Hull vs Liverpool, HW 12%, AW 72%, T 16%, pred score 1-2.6  actual: HW (3-1)
+2013-11-30 Newcastle vs West Brom, HW 36%, AW 37%, T 27%, pred score 1.3-1.3  actual: HW (2-1)
+2013-11-30 West Ham vs Fulham, HW 52%, AW 24%, T 24%, pred score 1.7-1  actual: HW (3-0)
+2013-12-01 Hull vs Liverpool, HW 12%, AW 73%, T 16%, pred score 1-2.6  actual: HW (3-1)
 2013-12-01 Man City vs Swansea, HW 73%, AW 12%, T 15%, pred score 2.7-1.1  actual: HW (3-0)
 2013-12-01 Spurs vs Man Utd, HW 28%, AW 48%, T 24%, pred score 1.2-1.6  actual: T (2-2)
 2013-12-01 Chelsea vs Southampton, HW 58%, AW 17%, T 25%, pred score 1.6-0.7  actual: HW (3-1)
-2013-12-03 Crystal Palace vs West Ham, HW 30%, AW 37%, T 33%, pred score 0.8-0.9  actual: HW (1-0)
-2013-12-04 Fulham vs Spurs, HW 16%, AW 66%, T 19%, pred score 1.1-2.3  actual: AW (1-2)
+2013-12-03 Crystal Palace vs West Ham, HW 30%, AW 36%, T 33%, pred score 0.8-0.9  actual: HW (1-0)
+2013-12-04 Fulham vs Spurs, HW 16%, AW 66%, T 18%, pred score 1.1-2.3  actual: AW (1-2)
 2013-12-04 Liverpool vs Norwich, HW 83%, AW 6%, T 11%, pred score 3.1-0.7  actual: HW (5-1)
 2013-12-04 Southampton vs Aston Villa, HW 54%, AW 21%, T 25%, pred score 1.6-0.9  actual: AW (2-3)
 2013-12-04 Sunderland vs Chelsea, HW 9%, AW 72%, T 19%, pred score 0.6-2.1  actual: AW (3-4)
@@ -540,9 +573,9 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-12-04 Arsenal vs Hull, HW 61%, AW 16%, T 23%, pred score 1.8-0.8  actual: HW (2-0)
 2013-12-04 Stoke vs Cardiff, HW 56%, AW 19%, T 25%, pred score 1.6-0.8  actual: T (0-0)
 2013-12-04 Swansea vs Newcastle, HW 47%, AW 28%, T 25%, pred score 1.6-1.2  actual: HW (3-0)
-2013-12-07 Liverpool vs West Ham, HW 70%, AW 14%, T 17%, pred score 2.6-1.1  actual: HW (4-1)
+2013-12-07 Liverpool vs West Ham, HW 70%, AW 14%, T 16%, pred score 2.6-1.1  actual: HW (4-1)
 2013-12-07 Southampton vs Man City, HW 16%, AW 66%, T 19%, pred score 1-2.3  actual: T (1-1)
-2013-12-07 Sunderland vs Spurs, HW 24%, AW 51%, T 25%, pred score 1.1-1.6  actual: AW (1-2)
+2013-12-07 Sunderland vs Spurs, HW 25%, AW 51%, T 25%, pred score 1.1-1.6  actual: AW (1-2)
 2013-12-07 West Brom vs Norwich, HW 48%, AW 24%, T 28%, pred score 1.3-0.8  actual: AW (0-2)
 2013-12-07 Man Utd vs Newcastle, HW 59%, AW 19%, T 22%, pred score 1.9-0.9  actual: AW (0-1)
 2013-12-07 Crystal Palace vs Cardiff, HW 46%, AW 24%, T 30%, pred score 1.2-0.8  actual: HW (2-0)
@@ -551,87 +584,87 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-12-08 Arsenal vs Everton, HW 38%, AW 35%, T 26%, pred score 1.3-1.3  actual: T (1-1)
 2013-12-09 Swansea vs Hull, HW 46%, AW 27%, T 27%, pred score 1.4-1  actual: T (1-1)
 2013-12-14 Cardiff vs West Brom, HW 23%, AW 52%, T 25%, pred score 1-1.6  actual: HW (1-0)
-2013-12-14 Hull vs Stoke, HW 30%, AW 41%, T 29%, pred score 1-1.2  actual: T (0-0)
-2013-12-14 Man City vs Arsenal, HW 56%, AW 23%, T 21%, pred score 2.1-1.3  actual: HW (6-3)
-2013-12-14 Chelsea vs Crystal Palace, HW 67%, AW 10%, T 23%, pred score 1.6-0.5  actual: HW (2-1)
+2013-12-14 Hull vs Stoke, HW 31%, AW 40%, T 29%, pred score 1-1.2  actual: T (0-0)
+2013-12-14 Man City vs Arsenal, HW 55%, AW 24%, T 21%, pred score 2.1-1.3  actual: HW (6-3)
+2013-12-14 Chelsea vs Crystal Palace, HW 66%, AW 10%, T 23%, pred score 1.6-0.5  actual: HW (2-1)
 2013-12-14 Everton vs Fulham, HW 75%, AW 10%, T 15%, pred score 2.5-0.8  actual: HW (4-1)
-2013-12-14 Newcastle vs Southampton, HW 24%, AW 50%, T 26%, pred score 1-1.6  actual: T (1-1)
+2013-12-14 Newcastle vs Southampton, HW 24%, AW 51%, T 25%, pred score 1-1.6  actual: T (1-1)
 2013-12-14 West Ham vs Sunderland, HW 39%, AW 32%, T 29%, pred score 1.2-1  actual: T (0-0)
 2013-12-15 Norwich vs Swansea, HW 17%, AW 58%, T 24%, pred score 0.8-1.6  actual: T (1-1)
 2013-12-15 Spurs vs Liverpool, HW 20%, AW 62%, T 18%, pred score 1.4-2.6  actual: AW (0-5)
-2013-12-15 Aston Villa vs Man Utd, HW 16%, AW 62%, T 21%, pred score 0.9-1.9  actual: AW (0-3)
-2013-12-21 Fulham vs Man City, HW 3%, AW 91%, T 6%, pred score 0.8-4.2  actual: AW (2-4)
+2013-12-15 Aston Villa vs Man Utd, HW 16%, AW 62%, T 22%, pred score 0.9-1.9  actual: AW (0-3)
+2013-12-21 Fulham vs Man City, HW 3%, AW 92%, T 6%, pred score 0.8-4.2  actual: AW (2-4)
 2013-12-21 Liverpool vs Cardiff, HW 87%, AW 5%, T 8%, pred score 3.7-0.9  actual: HW (3-1)
 2013-12-21 Sunderland vs Norwich, HW 46%, AW 25%, T 29%, pred score 1.3-0.8  actual: T (0-0)
-2013-12-21 West Brom vs Hull, HW 36%, AW 35%, T 29%, pred score 1.1-1.1  actual: T (1-1)
+2013-12-21 West Brom vs Hull, HW 36%, AW 35%, T 28%, pred score 1.1-1.1  actual: T (1-1)
 2013-12-21 Man Utd vs West Ham, HW 55%, AW 20%, T 25%, pred score 1.6-0.9  actual: HW (3-1)
 2013-12-21 Crystal Palace vs Newcastle, HW 33%, AW 36%, T 31%, pred score 1-1  actual: AW (0-3)
 2013-12-21 Stoke vs Aston Villa, HW 45%, AW 28%, T 27%, pred score 1.4-1  actual: HW (2-1)
 2013-12-22 Southampton vs Spurs, HW 39%, AW 35%, T 26%, pred score 1.4-1.3  actual: AW (2-3)
-2013-12-22 Swansea vs Everton, HW 25%, AW 51%, T 25%, pred score 1.1-1.6  actual: AW (1-2)
+2013-12-22 Swansea vs Everton, HW 25%, AW 50%, T 25%, pred score 1.1-1.6  actual: AW (1-2)
 2013-12-23 Arsenal vs Chelsea, HW 24%, AW 49%, T 27%, pred score 0.9-1.4  actual: T (0-0)
-2013-12-26 Cardiff vs Southampton, HW 13%, AW 66%, T 21%, pred score 0.8-2  actual: AW (0-3)
+2013-12-26 Cardiff vs Southampton, HW 14%, AW 66%, T 21%, pred score 0.8-2  actual: AW (0-3)
 2013-12-26 Hull vs Man Utd, HW 19%, AW 57%, T 24%, pred score 0.8-1.7  actual: AW (2-3)
 2013-12-26 Man City vs Liverpool, HW 53%, AW 29%, T 18%, pred score 2.7-2  actual: HW (2-1)
-2013-12-26 Norwich vs Fulham, HW 35%, AW 38%, T 27%, pred score 1.2-1.3  actual: AW (1-2)
+2013-12-26 Norwich vs Fulham, HW 35%, AW 38%, T 28%, pred score 1.2-1.3  actual: AW (1-2)
 2013-12-26 Spurs vs West Brom, HW 49%, AW 26%, T 25%, pred score 1.6-1.1  actual: T (1-1)
-2013-12-26 Chelsea vs Swansea, HW 65%, AW 14%, T 21%, pred score 1.9-0.7  actual: HW (1-0)
-2013-12-26 Aston Villa vs Crystal Palace, HW 32%, AW 36%, T 32%, pred score 0.9-1  actual: AW (0-1)
+2013-12-26 Chelsea vs Swansea, HW 64%, AW 14%, T 21%, pred score 1.9-0.7  actual: HW (1-0)
+2013-12-26 Aston Villa vs Crystal Palace, HW 33%, AW 36%, T 31%, pred score 0.9-1  actual: AW (0-1)
 2013-12-26 Everton vs Sunderland, HW 61%, AW 17%, T 23%, pred score 1.8-0.8  actual: AW (0-1)
 2013-12-26 Newcastle vs Stoke, HW 32%, AW 41%, T 27%, pred score 1.1-1.3  actual: HW (5-1)
 2013-12-26 West Ham vs Arsenal, HW 18%, AW 58%, T 24%, pred score 0.8-1.7  actual: AW (1-3)
-2013-12-28 Cardiff vs Sunderland, HW 24%, AW 50%, T 26%, pred score 1-1.5  actual: T (2-2)
+2013-12-28 Cardiff vs Sunderland, HW 24%, AW 49%, T 26%, pred score 1-1.5  actual: T (2-2)
 2013-12-28 Hull vs Fulham, HW 49%, AW 26%, T 25%, pred score 1.6-1.1  actual: HW (6-0)
 2013-12-28 Man City vs Crystal Palace, HW 76%, AW 8%, T 16%, pred score 2.4-0.6  actual: HW (1-0)
 2013-12-28 Norwich vs Man Utd, HW 11%, AW 69%, T 20%, pred score 0.6-1.9  actual: AW (0-1)
-2013-12-28 Aston Villa vs Swansea, HW 25%, AW 51%, T 25%, pred score 1.1-1.6  actual: T (1-1)
+2013-12-28 Aston Villa vs Swansea, HW 25%, AW 50%, T 25%, pred score 1.1-1.6  actual: T (1-1)
 2013-12-28 West Ham vs West Brom, HW 38%, AW 34%, T 29%, pred score 1.2-1.1  actual: T (3-3)
 2013-12-29 Spurs vs Stoke, HW 43%, AW 31%, T 26%, pred score 1.4-1.2  actual: HW (3-0)
-2013-12-29 Chelsea vs Liverpool, HW 48%, AW 30%, T 23%, pred score 1.8-1.4  actual: HW (2-1)
+2013-12-29 Chelsea vs Liverpool, HW 48%, AW 29%, T 23%, pred score 1.8-1.4  actual: HW (2-1)
 2013-12-29 Everton vs Southampton, HW 45%, AW 29%, T 27%, pred score 1.4-1.1  actual: HW (2-1)
-2013-12-29 Newcastle vs Arsenal, HW 16%, AW 62%, T 21%, pred score 0.9-2  actual: AW (0-1)
-2014-01-01 Fulham vs West Ham, HW 23%, AW 52%, T 24%, pred score 1-1.7  actual: HW (2-1)
+2013-12-29 Newcastle vs Arsenal, HW 17%, AW 62%, T 21%, pred score 0.9-2  actual: AW (0-1)
+2014-01-01 Fulham vs West Ham, HW 23%, AW 53%, T 24%, pred score 1-1.7  actual: HW (2-1)
 2014-01-01 Liverpool vs Hull, HW 73%, AW 12%, T 16%, pred score 2.6-1  actual: HW (2-0)
 2014-01-01 Southampton vs Chelsea, HW 17%, AW 58%, T 25%, pred score 0.7-1.6  actual: AW (0-3)
-2014-01-01 Sunderland vs Aston Villa, HW 38%, AW 34%, T 27%, pred score 1.2-1.2  actual: AW (0-1)
-2014-01-01 West Brom vs Newcastle, HW 37%, AW 37%, T 27%, pred score 1.3-1.3  actual: HW (1-0)
+2014-01-01 Sunderland vs Aston Villa, HW 38%, AW 35%, T 27%, pred score 1.2-1.2  actual: AW (0-1)
+2014-01-01 West Brom vs Newcastle, HW 37%, AW 36%, T 27%, pred score 1.3-1.3  actual: HW (1-0)
 2014-01-01 Man Utd vs Spurs, HW 47%, AW 28%, T 25%, pred score 1.6-1.2  actual: AW (1-2)
 2014-01-01 Crystal Palace vs Norwich, HW 42%, AW 24%, T 34%, pred score 1-0.7  actual: T (1-1)
 2014-01-01 Arsenal vs Cardiff, HW 76%, AW 8%, T 15%, pred score 2.4-0.7  actual: HW (2-0)
-2014-01-01 Stoke vs Everton, HW 21%, AW 53%, T 26%, pred score 0.9-1.6  actual: T (1-1)
-2014-01-01 Swansea vs Man City, HW 12%, AW 73%, T 15%, pred score 1.1-2.7  actual: AW (2-3)
+2014-01-01 Stoke vs Everton, HW 21%, AW 53%, T 25%, pred score 0.9-1.6  actual: T (1-1)
+2014-01-01 Swansea vs Man City, HW 12%, AW 72%, T 15%, pred score 1.1-2.7  actual: AW (2-3)
 2014-01-11 Cardiff vs West Ham, HW 21%, AW 52%, T 27%, pred score 0.8-1.5  actual: AW (0-2)
 2014-01-11 Fulham vs Sunderland, HW 27%, AW 49%, T 24%, pred score 1.2-1.7  actual: AW (1-4)
 2014-01-11 Hull vs Chelsea, HW 10%, AW 69%, T 21%, pred score 0.5-1.8  actual: AW (0-2)
 2014-01-11 Southampton vs West Brom, HW 51%, AW 24%, T 25%, pred score 1.6-1  actual: HW (1-0)
 2014-01-11 Spurs vs Crystal Palace, HW 47%, AW 24%, T 29%, pred score 1.3-0.8  actual: HW (2-0)
-2014-01-11 Man Utd vs Swansea, HW 50%, AW 26%, T 24%, pred score 1.7-1.2  actual: HW (2-0)
+2014-01-11 Man Utd vs Swansea, HW 51%, AW 26%, T 24%, pred score 1.7-1.2  actual: HW (2-0)
 2014-01-11 Everton vs Norwich, HW 68%, AW 11%, T 21%, pred score 1.8-0.6  actual: HW (2-0)
-2014-01-12 Newcastle vs Man City, HW 8%, AW 80%, T 12%, pred score 0.8-3  actual: AW (0-2)
+2014-01-12 Newcastle vs Man City, HW 8%, AW 80%, T 13%, pred score 0.8-3  actual: AW (0-2)
 2014-01-12 Stoke vs Liverpool, HW 15%, AW 68%, T 17%, pred score 1.2-2.6  actual: AW (3-5)
-2014-01-13 Aston Villa vs Arsenal, HW 14%, AW 65%, T 20%, pred score 0.8-2  actual: AW (1-2)
-2014-01-18 Liverpool vs Aston Villa, HW 78%, AW 10%, T 13%, pred score 3-1  actual: T (2-2)
+2014-01-13 Aston Villa vs Arsenal, HW 14%, AW 66%, T 20%, pred score 0.8-2  actual: AW (1-2)
+2014-01-18 Liverpool vs Aston Villa, HW 77%, AW 9%, T 13%, pred score 3-1  actual: T (2-2)
 2014-01-18 Man City vs Cardiff, HW 90%, AW 3%, T 7%, pred score 3.7-0.6  actual: HW (4-2)
 2014-01-18 Norwich vs Hull, HW 24%, AW 45%, T 31%, pred score 0.7-1.2  actual: HW (1-0)
 2014-01-18 Sunderland vs Southampton, HW 23%, AW 52%, T 25%, pred score 1-1.6  actual: T (2-2)
 2014-01-18 Crystal Palace vs Stoke, HW 29%, AW 40%, T 31%, pred score 0.8-1.1  actual: HW (1-0)
-2014-01-18 Arsenal vs Fulham, HW 78%, AW 9%, T 14%, pred score 2.8-0.9  actual: HW (2-0)
-2014-01-18 West Ham vs Newcastle, HW 38%, AW 34%, T 28%, pred score 1.2-1.1  actual: AW (1-3)
+2014-01-18 Arsenal vs Fulham, HW 78%, AW 9%, T 13%, pred score 2.8-0.9  actual: HW (2-0)
+2014-01-18 West Ham vs Newcastle, HW 38%, AW 34%, T 29%, pred score 1.2-1.1  actual: AW (1-3)
 2014-01-19 Chelsea vs Man Utd, HW 52%, AW 22%, T 26%, pred score 1.5-0.9  actual: HW (3-1)
 2014-01-19 Swansea vs Spurs, HW 35%, AW 40%, T 25%, pred score 1.4-1.5  actual: AW (1-3)
 2014-01-20 West Brom vs Everton, HW 18%, AW 59%, T 23%, pred score 0.9-1.8  actual: T (1-1)
-2014-01-28 Liverpool vs Everton, HW 47%, AW 31%, T 22%, pred score 2-1.6  actual: HW (4-0)
-2014-01-28 Norwich vs Newcastle, HW 23%, AW 48%, T 29%, pred score 0.8-1.3  actual: T (0-0)
+2014-01-28 Liverpool vs Everton, HW 48%, AW 31%, T 22%, pred score 2-1.6  actual: HW (4-0)
+2014-01-28 Norwich vs Newcastle, HW 24%, AW 48%, T 29%, pred score 0.8-1.3  actual: T (0-0)
 2014-01-28 Southampton vs Arsenal, HW 27%, AW 47%, T 25%, pred score 1.1-1.6  actual: T (2-2)
-2014-01-28 Man Utd vs Cardiff, HW 74%, AW 10%, T 17%, pred score 2.3-0.7  actual: HW (2-0)
-2014-01-28 Crystal Palace vs Hull, HW 32%, AW 34%, T 34%, pred score 0.9-0.9  actual: HW (1-0)
+2014-01-28 Man Utd vs Cardiff, HW 73%, AW 10%, T 17%, pred score 2.3-0.7  actual: HW (2-0)
+2014-01-28 Crystal Palace vs Hull, HW 32%, AW 34%, T 33%, pred score 0.9-0.9  actual: HW (1-0)
 2014-01-28 Swansea vs Fulham, HW 63%, AW 18%, T 19%, pred score 2.3-1.1  actual: HW (2-0)
-2014-01-29 Spurs vs Man City, HW 14%, AW 70%, T 17%, pred score 1.1-2.6  actual: AW (1-5)
+2014-01-29 Spurs vs Man City, HW 14%, AW 70%, T 16%, pred score 1.1-2.6  actual: AW (1-5)
 2014-01-29 Sunderland vs Stoke, HW 30%, AW 43%, T 27%, pred score 1.1-1.3  actual: HW (1-0)
-2014-01-29 Chelsea vs West Ham, HW 66%, AW 11%, T 22%, pred score 1.7-0.5  actual: T (0-0)
+2014-01-29 Chelsea vs West Ham, HW 67%, AW 11%, T 22%, pred score 1.7-0.5  actual: T (0-0)
 2014-01-29 Aston Villa vs West Brom, HW 33%, AW 40%, T 27%, pred score 1.2-1.3  actual: HW (4-3)
 2014-02-01 Cardiff vs Norwich, HW 34%, AW 36%, T 31%, pred score 1-1  actual: HW (2-1)
-2014-02-01 Fulham vs Southampton, HW 14%, AW 67%, T 18%, pred score 1-2.3  actual: AW (0-3)
+2014-02-01 Fulham vs Southampton, HW 14%, AW 67%, T 19%, pred score 1-2.3  actual: AW (0-3)
 2014-02-01 Hull vs Spurs, HW 25%, AW 48%, T 27%, pred score 1-1.4  actual: T (1-1)
 2014-02-01 Everton vs Aston Villa, HW 62%, AW 16%, T 22%, pred score 1.8-0.8  actual: HW (2-1)
 2014-02-01 Newcastle vs Sunderland, HW 38%, AW 35%, T 27%, pred score 1.3-1.2  actual: AW (0-3)
@@ -639,7 +672,7 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-02-01 West Ham vs Swansea, HW 30%, AW 43%, T 27%, pred score 1.1-1.4  actual: HW (2-0)
 2014-02-02 West Brom vs Liverpool, HW 12%, AW 74%, T 14%, pred score 1.1-3  actual: T (1-1)
 2014-02-02 Arsenal vs Crystal Palace, HW 59%, AW 16%, T 25%, pred score 1.6-0.7  actual: HW (2-0)
-2014-02-03 Man City vs Chelsea, HW 38%, AW 36%, T 26%, pred score 1.4-1.4  actual: AW (0-1)
+2014-02-03 Man City vs Chelsea, HW 38%, AW 37%, T 25%, pred score 1.4-1.4  actual: AW (0-1)
 2014-02-08 Liverpool vs Arsenal, HW 46%, AW 33%, T 21%, pred score 2.1-1.8  actual: HW (5-1)
 2014-02-08 Norwich vs Man City, HW 4%, AW 86%, T 10%, pred score 0.6-3.1  actual: T (0-0)
 2014-02-08 Southampton vs Stoke, HW 45%, AW 28%, T 27%, pred score 1.4-1  actual: T (2-2)
@@ -648,40 +681,40 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-02-08 Chelsea vs Newcastle, HW 71%, AW 10%, T 19%, pred score 2-0.6  actual: HW (3-0)
 2014-02-08 Aston Villa vs West Ham, HW 30%, AW 41%, T 29%, pred score 1-1.2  actual: AW (0-2)
 2014-02-08 Swansea vs Cardiff, HW 63%, AW 16%, T 21%, pred score 2-0.9  actual: HW (3-0)
-2014-02-09 Spurs vs Everton, HW 26%, AW 48%, T 25%, pred score 1.1-1.5  actual: HW (1-0)
+2014-02-09 Spurs vs Everton, HW 27%, AW 48%, T 26%, pred score 1.1-1.5  actual: HW (1-0)
 2014-02-09 Man Utd vs Fulham, HW 75%, AW 10%, T 15%, pred score 2.7-0.9  actual: T (2-2)
 2014-02-11 Cardiff vs Aston Villa, HW 26%, AW 47%, T 27%, pred score 1-1.4  actual: T (0-0)
-2014-02-11 Hull vs Southampton, HW 23%, AW 49%, T 27%, pred score 0.9-1.4  actual: AW (0-1)
+2014-02-11 Hull vs Southampton, HW 24%, AW 49%, T 27%, pred score 0.9-1.4  actual: AW (0-1)
 2014-02-11 West Brom vs Chelsea, HW 10%, AW 71%, T 19%, pred score 0.6-2  actual: T (1-1)
-2014-02-11 West Ham vs Norwich, HW 48%, AW 21%, T 30%, pred score 1.2-0.7  actual: HW (2-0)
+2014-02-11 West Ham vs Norwich, HW 48%, AW 22%, T 30%, pred score 1.2-0.7  actual: HW (2-0)
 2014-02-12 Fulham vs Liverpool, HW 5%, AW 88%, T 7%, pred score 1.1-4.3  actual: AW (2-3)
-2014-02-12 Arsenal vs Man Utd, HW 40%, AW 34%, T 25%, pred score 1.5-1.3  actual: T (0-0)
+2014-02-12 Arsenal vs Man Utd, HW 41%, AW 34%, T 25%, pred score 1.5-1.3  actual: T (0-0)
 2014-02-12 Newcastle vs Spurs, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (0-4)
-2014-02-12 Stoke vs Swansea, HW 32%, AW 41%, T 26%, pred score 1.2-1.4  actual: T (1-1)
+2014-02-12 Stoke vs Swansea, HW 33%, AW 41%, T 26%, pred score 1.2-1.4  actual: T (1-1)
 2014-02-22 Cardiff vs Hull, HW 23%, AW 49%, T 28%, pred score 0.9-1.4  actual: AW (0-4)
-2014-02-22 Man City vs Stoke, HW 74%, AW 10%, T 15%, pred score 2.6-0.9  actual: HW (1-0)
+2014-02-22 Man City vs Stoke, HW 75%, AW 10%, T 15%, pred score 2.6-0.9  actual: HW (1-0)
 2014-02-22 West Brom vs Fulham, HW 52%, AW 25%, T 23%, pred score 1.8-1.2  actual: T (1-1)
 2014-02-22 Crystal Palace vs Man Utd, HW 18%, AW 56%, T 26%, pred score 0.7-1.5  actual: AW (0-2)
 2014-02-22 Arsenal vs Sunderland, HW 64%, AW 15%, T 21%, pred score 2-0.9  actual: HW (4-1)
 2014-02-22 Chelsea vs Everton, HW 49%, AW 23%, T 28%, pred score 1.4-0.8  actual: HW (1-0)
-2014-02-22 West Ham vs Southampton, HW 25%, AW 47%, T 28%, pred score 0.9-1.4  actual: HW (3-1)
+2014-02-22 West Ham vs Southampton, HW 26%, AW 47%, T 28%, pred score 0.9-1.4  actual: HW (3-1)
 2014-02-23 Liverpool vs Swansea, HW 65%, AW 18%, T 17%, pred score 2.7-1.4  actual: HW (4-3)
 2014-02-23 Norwich vs Spurs, HW 16%, AW 60%, T 24%, pred score 0.7-1.7  actual: HW (1-0)
 2014-02-23 Newcastle vs Aston Villa, HW 40%, AW 33%, T 27%, pred score 1.3-1.2  actual: HW (1-0)
 2014-03-01 Fulham vs Chelsea, HW 5%, AW 85%, T 11%, pred score 0.6-2.9  actual: AW (1-3)
-2014-03-01 Hull vs Newcastle, HW 35%, AW 36%, T 28%, pred score 1.1-1.1  actual: AW (1-4)
-2014-03-01 Southampton vs Liverpool, HW 22%, AW 58%, T 19%, pred score 1.4-2.3  actual: AW (0-3)
-2014-03-01 Everton vs West Ham, HW 55%, AW 20%, T 26%, pred score 1.5-0.8  actual: HW (1-0)
-2014-03-01 Stoke vs Arsenal, HW 20%, AW 57%, T 23%, pred score 0.9-1.7  actual: HW (1-0)
-2014-03-02 Spurs vs Cardiff, HW 65%, AW 15%, T 21%, pred score 2-0.8  actual: HW (1-0)
+2014-03-01 Hull vs Newcastle, HW 35%, AW 36%, T 29%, pred score 1.1-1.1  actual: AW (1-4)
+2014-03-01 Southampton vs Liverpool, HW 23%, AW 58%, T 19%, pred score 1.4-2.3  actual: AW (0-3)
+2014-03-01 Everton vs West Ham, HW 55%, AW 19%, T 26%, pred score 1.5-0.8  actual: HW (1-0)
+2014-03-01 Stoke vs Arsenal, HW 20%, AW 56%, T 24%, pred score 0.9-1.7  actual: HW (1-0)
+2014-03-02 Spurs vs Cardiff, HW 64%, AW 15%, T 21%, pred score 2-0.8  actual: HW (1-0)
 2014-03-02 Aston Villa vs Norwich, HW 44%, AW 26%, T 30%, pred score 1.2-0.9  actual: HW (4-1)
 2014-03-02 Swansea vs Crystal Palace, HW 45%, AW 26%, T 29%, pred score 1.3-0.9  actual: T (1-1)
 2014-03-08 Cardiff vs Fulham, HW 35%, AW 40%, T 25%, pred score 1.4-1.5  actual: HW (3-1)
 2014-03-08 Norwich vs Stoke, HW 20%, AW 52%, T 28%, pred score 0.7-1.4  actual: T (1-1)
 2014-03-08 West Brom vs Man Utd, HW 19%, AW 59%, T 22%, pred score 0.9-1.9  actual: AW (0-3)
-2014-03-08 Crystal Palace vs Southampton, HW 22%, AW 48%, T 29%, pred score 0.8-1.3  actual: AW (0-1)
-2014-03-08 Chelsea vs Spurs, HW 62%, AW 15%, T 23%, pred score 1.8-0.8  actual: HW (4-0)
-2014-03-15 Fulham vs Newcastle, HW 25%, AW 51%, T 23%, pred score 1.2-1.8  actual: HW (1-0)
+2014-03-08 Crystal Palace vs Southampton, HW 22%, AW 49%, T 29%, pred score 0.8-1.3  actual: AW (0-1)
+2014-03-08 Chelsea vs Spurs, HW 62%, AW 16%, T 23%, pred score 1.8-0.8  actual: HW (4-0)
+2014-03-15 Fulham vs Newcastle, HW 25%, AW 52%, T 23%, pred score 1.2-1.8  actual: HW (1-0)
 2014-03-15 Hull vs Man City, HW 8%, AW 78%, T 14%, pred score 0.7-2.6  actual: AW (0-2)
 2014-03-15 Southampton vs Norwich, HW 61%, AW 15%, T 24%, pred score 1.6-0.7  actual: HW (4-2)
 2014-03-15 Sunderland vs Crystal Palace, HW 34%, AW 34%, T 31%, pred score 1-1  actual: T (0-0)
@@ -689,8 +722,8 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-03-15 Everton vs Cardiff, HW 73%, AW 9%, T 18%, pred score 2.2-0.6  actual: HW (2-1)
 2014-03-15 Stoke vs West Ham, HW 38%, AW 33%, T 29%, pred score 1.1-1  actual: HW (3-1)
 2014-03-15 Swansea vs West Brom, HW 47%, AW 28%, T 25%, pred score 1.6-1.2  actual: AW (1-2)
-2014-03-16 Spurs vs Arsenal, HW 26%, AW 51%, T 24%, pred score 1.1-1.7  actual: AW (0-1)
-2014-03-16 Man Utd vs Liverpool, HW 29%, AW 50%, T 20%, pred score 1.7-2.2  actual: AW (0-3)
+2014-03-16 Spurs vs Arsenal, HW 25%, AW 51%, T 24%, pred score 1.1-1.7  actual: AW (0-1)
+2014-03-16 Man Utd vs Liverpool, HW 29%, AW 50%, T 21%, pred score 1.7-2.2  actual: AW (0-3)
 2014-03-22 Cardiff vs Liverpool, HW 5%, AW 87%, T 8%, pred score 0.9-3.7  actual: AW (3-6)
 2014-03-22 Hull vs West Brom, HW 35%, AW 36%, T 29%, pred score 1.1-1.1  actual: HW (2-0)
 2014-03-22 Man City vs Fulham, HW 92%, AW 3%, T 6%, pred score 4.2-0.8  actual: HW (5-0)
@@ -698,37 +731,37 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-03-22 Chelsea vs Arsenal, HW 49%, AW 24%, T 27%, pred score 1.4-0.9  actual: HW (6-0)
 2014-03-22 Everton vs Swansea, HW 50%, AW 25%, T 25%, pred score 1.6-1.1  actual: HW (3-2)
 2014-03-22 Newcastle vs Crystal Palace, HW 36%, AW 33%, T 31%, pred score 1-1  actual: HW (1-0)
-2014-03-22 West Ham vs Man Utd, HW 20%, AW 54%, T 25%, pred score 0.9-1.6  actual: AW (0-2)
+2014-03-22 West Ham vs Man Utd, HW 20%, AW 55%, T 25%, pred score 0.9-1.6  actual: AW (0-2)
 2014-03-23 Spurs vs Southampton, HW 34%, AW 40%, T 26%, pred score 1.3-1.4  actual: HW (3-2)
-2014-03-23 Aston Villa vs Stoke, HW 28%, AW 45%, T 27%, pred score 1-1.4  actual: AW (1-4)
+2014-03-23 Aston Villa vs Stoke, HW 28%, AW 44%, T 28%, pred score 1-1.4  actual: AW (1-4)
 2014-03-25 Man Utd vs Man City, HW 21%, AW 59%, T 20%, pred score 1.2-2.2  actual: AW (0-3)
-2014-03-25 Arsenal vs Swansea, HW 54%, AW 24%, T 23%, pred score 1.8-1.1  actual: T (2-2)
+2014-03-25 Arsenal vs Swansea, HW 54%, AW 23%, T 23%, pred score 1.8-1.1  actual: T (2-2)
 2014-03-25 Newcastle vs Everton, HW 18%, AW 59%, T 23%, pred score 0.9-1.8  actual: AW (0-3)
 2014-03-26 Liverpool vs Sunderland, HW 76%, AW 11%, T 14%, pred score 3-1.1  actual: HW (2-1)
-2014-03-26 West Ham vs Hull, HW 37%, AW 33%, T 31%, pred score 1-1  actual: HW (2-1)
+2014-03-26 West Ham vs Hull, HW 37%, AW 32%, T 31%, pred score 1-1  actual: HW (2-1)
 2014-03-29 Southampton vs Newcastle, HW 51%, AW 24%, T 25%, pred score 1.6-1  actual: HW (4-0)
 2014-03-29 West Brom vs Cardiff, HW 52%, AW 23%, T 25%, pred score 1.6-1  actual: T (3-3)
 2014-03-29 Man Utd vs Aston Villa, HW 62%, AW 16%, T 22%, pred score 1.9-0.9  actual: HW (4-1)
 2014-03-29 Crystal Palace vs Chelsea, HW 10%, AW 67%, T 23%, pred score 0.5-1.6  actual: HW (1-0)
-2014-03-29 Arsenal vs Man City, HW 24%, AW 56%, T 21%, pred score 1.3-2.1  actual: T (1-1)
-2014-03-29 Stoke vs Hull, HW 40%, AW 31%, T 29%, pred score 1.2-1  actual: HW (1-0)
-2014-03-29 Swansea vs Norwich, HW 58%, AW 17%, T 25%, pred score 1.6-0.8  actual: HW (3-0)
-2014-03-30 Fulham vs Everton, HW 10%, AW 75%, T 15%, pred score 0.8-2.5  actual: AW (1-3)
+2014-03-29 Arsenal vs Man City, HW 23%, AW 56%, T 21%, pred score 1.3-2.1  actual: T (1-1)
+2014-03-29 Stoke vs Hull, HW 40%, AW 30%, T 29%, pred score 1.2-1  actual: HW (1-0)
+2014-03-29 Swansea vs Norwich, HW 58%, AW 17%, T 24%, pred score 1.6-0.8  actual: HW (3-0)
+2014-03-30 Fulham vs Everton, HW 10%, AW 75%, T 16%, pred score 0.8-2.5  actual: AW (1-3)
 2014-03-30 Liverpool vs Spurs, HW 62%, AW 20%, T 18%, pred score 2.6-1.4  actual: HW (4-0)
 2014-03-31 Sunderland vs West Ham, HW 32%, AW 39%, T 29%, pred score 1-1.2  actual: AW (1-2)
 2014-04-05 Cardiff vs Crystal Palace, HW 24%, AW 46%, T 30%, pred score 0.8-1.2  actual: AW (0-3)
 2014-04-05 Hull vs Swansea, HW 27%, AW 46%, T 27%, pred score 1-1.4  actual: HW (1-0)
 2014-04-05 Man City vs Southampton, HW 66%, AW 16%, T 19%, pred score 2.3-1  actual: HW (4-1)
-2014-04-05 Norwich vs West Brom, HW 24%, AW 48%, T 28%, pred score 0.8-1.3  actual: AW (0-1)
+2014-04-05 Norwich vs West Brom, HW 23%, AW 48%, T 28%, pred score 0.8-1.3  actual: AW (0-1)
 2014-04-05 Chelsea vs Stoke, HW 66%, AW 12%, T 22%, pred score 1.8-0.6  actual: HW (3-0)
 2014-04-05 Aston Villa vs Fulham, HW 47%, AW 29%, T 24%, pred score 1.7-1.2  actual: AW (1-2)
 2014-04-05 Newcastle vs Man Utd, HW 19%, AW 59%, T 22%, pred score 0.9-1.9  actual: AW (0-4)
-2014-04-06 Everton vs Arsenal, HW 35%, AW 38%, T 26%, pred score 1.3-1.3  actual: HW (3-0)
+2014-04-06 Everton vs Arsenal, HW 35%, AW 38%, T 27%, pred score 1.3-1.3  actual: HW (3-0)
 2014-04-06 West Ham vs Liverpool, HW 14%, AW 70%, T 17%, pred score 1.1-2.6  actual: AW (1-2)
-2014-04-07 Spurs vs Sunderland, HW 51%, AW 25%, T 25%, pred score 1.6-1.1  actual: HW (5-1)
+2014-04-07 Spurs vs Sunderland, HW 51%, AW 24%, T 25%, pred score 1.6-1.1  actual: HW (5-1)
 2014-04-12 Fulham vs Norwich, HW 38%, AW 35%, T 27%, pred score 1.3-1.2  actual: HW (1-0)
-2014-04-12 Southampton vs Cardiff, HW 66%, AW 14%, T 21%, pred score 2-0.8  actual: AW (0-1)
-2014-04-12 Sunderland vs Everton, HW 17%, AW 61%, T 23%, pred score 0.8-1.8  actual: AW (0-1)
+2014-04-12 Southampton vs Cardiff, HW 65%, AW 14%, T 21%, pred score 2-0.8  actual: AW (0-1)
+2014-04-12 Sunderland vs Everton, HW 17%, AW 60%, T 23%, pred score 0.8-1.8  actual: AW (0-1)
 2014-04-12 West Brom vs Spurs, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: T (3-3)
 2014-04-12 Crystal Palace vs Aston Villa, HW 36%, AW 33%, T 32%, pred score 1-0.9  actual: HW (1-0)
 2014-04-12 Stoke vs Newcastle, HW 41%, AW 31%, T 27%, pred score 1.3-1.1  actual: HW (1-0)
@@ -737,47 +770,47 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-04-15 Arsenal vs West Ham, HW 58%, AW 18%, T 24%, pred score 1.7-0.8  actual: HW (3-1)
 2014-04-16 Man City vs Sunderland, HW 81%, AW 7%, T 12%, pred score 3-0.8  actual: T (2-2)
 2014-04-16 Everton vs Crystal Palace, HW 56%, AW 17%, T 27%, pred score 1.4-0.6  actual: AW (2-3)
-2014-04-19 Cardiff vs Stoke, HW 19%, AW 56%, T 25%, pred score 0.8-1.6  actual: T (1-1)
+2014-04-19 Cardiff vs Stoke, HW 19%, AW 56%, T 24%, pred score 0.8-1.6  actual: T (1-1)
 2014-04-19 Spurs vs Fulham, HW 65%, AW 16%, T 19%, pred score 2.3-1.1  actual: HW (3-1)
-2014-04-19 Chelsea vs Sunderland, HW 72%, AW 9%, T 19%, pred score 2.1-0.6  actual: AW (1-2)
+2014-04-19 Chelsea vs Sunderland, HW 73%, AW 9%, T 18%, pred score 2.1-0.6  actual: AW (1-2)
 2014-04-19 Aston Villa vs Southampton, HW 21%, AW 54%, T 25%, pred score 0.9-1.6  actual: T (0-0)
 2014-04-19 Newcastle vs Swansea, HW 28%, AW 47%, T 25%, pred score 1.2-1.6  actual: AW (1-2)
-2014-04-19 West Ham vs Crystal Palace, HW 36%, AW 31%, T 33%, pred score 0.9-0.8  actual: AW (0-1)
+2014-04-19 West Ham vs Crystal Palace, HW 37%, AW 30%, T 33%, pred score 0.9-0.8  actual: AW (0-1)
 2014-04-20 Hull vs Arsenal, HW 17%, AW 60%, T 23%, pred score 0.8-1.8  actual: AW (0-3)
 2014-04-20 Norwich vs Liverpool, HW 6%, AW 83%, T 11%, pred score 0.7-3.1  actual: AW (2-3)
 2014-04-20 Everton vs Man Utd, HW 38%, AW 35%, T 27%, pred score 1.3-1.3  actual: HW (2-0)
-2014-04-21 Man City vs West Brom, HW 80%, AW 8%, T 13%, pred score 3-0.8  actual: HW (3-1)
-2014-04-26 Fulham vs Hull, HW 26%, AW 50%, T 25%, pred score 1.1-1.6  actual: T (2-2)
-2014-04-26 Southampton vs Everton, HW 28%, AW 44%, T 27%, pred score 1.1-1.4  actual: HW (2-0)
-2014-04-26 West Brom vs West Ham, HW 34%, AW 37%, T 29%, pred score 1.1-1.2  actual: HW (1-0)
+2014-04-21 Man City vs West Brom, HW 80%, AW 8%, T 12%, pred score 3-0.8  actual: HW (3-1)
+2014-04-26 Fulham vs Hull, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: T (2-2)
+2014-04-26 Southampton vs Everton, HW 29%, AW 44%, T 27%, pred score 1.1-1.4  actual: HW (2-0)
+2014-04-26 West Brom vs West Ham, HW 34%, AW 38%, T 29%, pred score 1.1-1.2  actual: HW (1-0)
 2014-04-26 Man Utd vs Norwich, HW 69%, AW 11%, T 20%, pred score 1.9-0.6  actual: HW (4-0)
 2014-04-26 Stoke vs Spurs, HW 31%, AW 43%, T 26%, pred score 1.2-1.4  actual: AW (0-1)
-2014-04-26 Swansea vs Aston Villa, HW 51%, AW 25%, T 25%, pred score 1.6-1.1  actual: HW (4-1)
+2014-04-26 Swansea vs Aston Villa, HW 50%, AW 25%, T 25%, pred score 1.6-1.1  actual: HW (4-1)
 2014-04-27 Liverpool vs Chelsea, HW 29%, AW 48%, T 23%, pred score 1.4-1.8  actual: AW (0-2)
-2014-04-27 Sunderland vs Cardiff, HW 50%, AW 24%, T 26%, pred score 1.5-1  actual: HW (4-0)
+2014-04-27 Sunderland vs Cardiff, HW 50%, AW 25%, T 26%, pred score 1.5-1  actual: HW (4-0)
 2014-04-27 Crystal Palace vs Man City, HW 8%, AW 76%, T 16%, pred score 0.6-2.4  actual: AW (0-2)
-2014-04-28 Arsenal vs Newcastle, HW 62%, AW 16%, T 21%, pred score 2-0.9  actual: HW (3-0)
+2014-04-28 Arsenal vs Newcastle, HW 63%, AW 16%, T 21%, pred score 2-0.9  actual: HW (3-0)
 2014-05-03 Man Utd vs Sunderland, HW 61%, AW 17%, T 22%, pred score 1.9-0.9  actual: AW (0-1)
-2014-05-03 Aston Villa vs Hull, HW 32%, AW 38%, T 29%, pred score 1-1.1  actual: HW (3-1)
+2014-05-03 Aston Villa vs Hull, HW 33%, AW 38%, T 29%, pred score 1-1.1  actual: HW (3-1)
 2014-05-03 Everton vs Man City, HW 22%, AW 56%, T 22%, pred score 1.2-2  actual: AW (2-3)
 2014-05-03 Newcastle vs Cardiff, HW 52%, AW 23%, T 25%, pred score 1.6-1  actual: HW (3-0)
 2014-05-03 Stoke vs Fulham, HW 57%, AW 21%, T 22%, pred score 1.9-1.1  actual: HW (4-1)
 2014-05-03 Swansea vs Southampton, HW 32%, AW 42%, T 26%, pred score 1.2-1.5  actual: AW (0-1)
 2014-05-03 West Ham vs Spurs, HW 28%, AW 45%, T 27%, pred score 1-1.4  actual: HW (2-0)
 2014-05-04 Arsenal vs West Brom, HW 62%, AW 17%, T 21%, pred score 2-0.9  actual: HW (1-0)
-2014-05-04 Chelsea vs Norwich, HW 78%, AW 6%, T 16%, pred score 2.1-0.4  actual: T (0-0)
+2014-05-04 Chelsea vs Norwich, HW 78%, AW 6%, T 17%, pred score 2.1-0.4  actual: T (0-0)
 2014-05-05 Crystal Palace vs Liverpool, HW 12%, AW 71%, T 17%, pred score 0.9-2.4  actual: T (3-3)
 2014-05-06 Man Utd vs Hull, HW 57%, AW 19%, T 24%, pred score 1.7-0.8  actual: HW (3-1)
-2014-05-07 Man City vs Aston Villa, HW 82%, AW 6%, T 11%, pred score 3-0.8  actual: HW (4-0)
+2014-05-07 Man City vs Aston Villa, HW 83%, AW 6%, T 11%, pred score 3-0.8  actual: HW (4-0)
 2014-05-07 Sunderland vs West Brom, HW 35%, AW 38%, T 27%, pred score 1.2-1.3  actual: HW (2-0)
 2014-05-11 Cardiff vs Chelsea, HW 5%, AW 82%, T 13%, pred score 0.4-2.5  actual: AW (1-2)
 2014-05-11 Fulham vs Crystal Palace, HW 27%, AW 46%, T 27%, pred score 1-1.4  actual: T (2-2)
 2014-05-11 Hull vs Everton, HW 18%, AW 57%, T 25%, pred score 0.7-1.6  actual: AW (0-2)
-2014-05-11 Liverpool vs Newcastle, HW 74%, AW 12%, T 14%, pred score 3-1.1  actual: HW (2-1)
-2014-05-11 Man City vs West Ham, HW 76%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
+2014-05-11 Liverpool vs Newcastle, HW 74%, AW 11%, T 14%, pred score 3-1.1  actual: HW (2-1)
+2014-05-11 Man City vs West Ham, HW 75%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
 2014-05-11 Norwich vs Arsenal, HW 10%, AW 72%, T 19%, pred score 0.6-2  actual: AW (0-2)
 2014-05-11 Southampton vs Man Utd, HW 30%, AW 44%, T 26%, pred score 1.2-1.5  actual: T (1-1)
-2014-05-11 Spurs vs Aston Villa, HW 52%, AW 23%, T 25%, pred score 1.7-1  actual: HW (3-0)
+2014-05-11 Spurs vs Aston Villa, HW 52%, AW 23%, T 24%, pred score 1.7-1  actual: HW (3-0)
 2014-05-11 Sunderland vs Swansea, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
 2014-05-11 West Brom vs Stoke, HW 32%, AW 41%, T 27%, pred score 1.1-1.3  actual: AW (1-2)
 </code></pre>
@@ -788,27 +821,48 @@ sim2 &lt;- simulate(md2, hdv = 1)
 </code></pre>
 
 <pre><code>
-               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th 14th 15th 16th 17th 18th 19th 20th
-Swansea          1   3   6   8   8   8   8   8   8    7    6    5    5    5    4    3    2    1    1    0
-West Ham         0   0   1   2   3   4   6   8   9    9    9    9   10   10    8    5    3    2    1    0
-Crystal Palace   2   4   4   4   5   6   5   4   5    7    8    7    5    4    5    6    5    4    5    5
-Cardiff          0   0   0   0   0   0   0   0   0    1    1    2    4    6   10   14   18   19   15    8
-Arsenal          2   4   7  10  10   9   9   9   8    6    5    5    5    4    3    2    1    1    0    0
-Man City        42  22  15  10   5   3   1   1   1    0    0    0    0    0    0    0    0    0    0    0
-Chelsea         20  17  11   9   8   7   5   4   4    4    3    2    2    1    1    1    1    0    0    0
-Liverpool       14  15  13  11  10   9   7   5   3    3    2    2    2    2    1    1    0    0    0    0
-Norwich          0   0   0   0   0   0   1   1   1    2    2    3    5    8   10   13   14   15   13   11
-Stoke            3   5   5   5   6   7   6   5   5    6    7    6    4    4    5    5    4    3    3    3
-Man Utd          2   4   7   8   9   9   9   9   8    7    6    5    5    5    3    2    1    1    0    0
-Hull             0   1   2   3   4   5   6   7   6    6    7    7    8    8    8    6    5    4    3    2
-Everton          1   3   5   8   9   8   8   9   8    7    6    6    6    5    4    3    2    1    1    0
-West Brom        0   1   1   3   4   5   6   7   8    7    7    8    9    9    8    7    5    3    2    1
-Fulham           1   2   2   3   3   4   4   4   5    6    7    6    5    5    6    8    7    7    8    9
-Southampton      1   2   3   4   5   6   7   7   6    6    7    7    8    8    7    5    4    3    2    1
-Spurs            2   3   5   6   7   8   8   7   6    6    6    6    6    6    5    4    3    3    2    1
-Sunderland       5   7   8   5   2   1   1   1   2    3    4    6    5    2    2    3    5    9   14   17
-Aston Villa      0   1   1   1   1   2   2   3   4    5    5    4    4    5    7    8    9   11   12   14
-Newcastle        3   4   3   1   1   1   1   1   2    2    2    2    2    2    3    5    9   13   17   26
+               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th
+Swansea          1   3   6   8   9   8   8   8   8    7    6    5    5
+West Ham         0   0   1   2   3   4   6   8   9    9    9   10   10
+Crystal Palace   2   4   4   4   5   6   5   4   5    7    8    7    5
+Cardiff          0   0   0   0   0   0   0   0   0    1    1    2    4
+Arsenal          2   4   7   9  10   9   9   9   8    7    6    5    5
+Man City        42  22  15   9   5   3   1   1   1    0    0    0    0
+Chelsea         20  17  11   9   8   6   5   4   4    4    3    2    1
+Liverpool       14  15  13  12  10   9   7   5   3    3    2    2    2
+Norwich          0   0   0   0   0   0   1   1   1    2    2    3    5
+Stoke            3   5   6   5   6   7   6   5   5    6    7    6    5
+Man Utd          2   4   7   8   9   9   9   9   8    7    6    5    5
+Hull             0   1   2   3   4   5   6   7   6    6    7    7    8
+Everton          1   3   5   8   8   8   8   9   8    7    6    6    6
+West Brom        0   1   1   3   4   5   6   7   8    7    7    8    9
+Fulham           1   2   2   3   3   4   4   4   5    6    7    6    5
+Southampton      1   2   3   4   5   6   7   7   6    6    7    7    8
+Spurs            2   3   5   6   7   8   8   7   6    6    6    6    6
+Sunderland       5   8   7   4   2   1   1   1   2    3    5    6    5
+Aston Villa      0   1   1   1   1   2   2   3   4    5    5    4    4
+Newcastle        3   4   3   1   1   1   1   1   2    2    2    2    2
+               14th 15th 16th 17th 18th 19th 20th
+Swansea           5    4    3    2    1    1    0
+West Ham         10    8    5    3    2    1    0
+Crystal Palace    4    5    6    5    4    5    5
+Cardiff           7   10   14   18   19   15    8
+Arsenal           4    3    2    1    1    0    0
+Man City          0    0    0    0    0    0    0
+Chelsea           1    1    1    1    1    0    0
+Liverpool         2    1    1    0    0    0    0
+Norwich           8   10   13   14   15   13   11
+Stoke             4    5    5    4    3    4    3
+Man Utd           5    4    2    2    1    0    0
+Hull              8    8    6    5    4    3    2
+Everton           5    4    3    2    1    1    0
+West Brom         9    8    7    5    3    2    1
+Fulham            5    6    7    7    7    8    9
+Southampton       8    7    5    4    3    2    1
+Spurs             6    5    4    3    3    2    1
+Sunderland        2    2    3    5    9   13   17
+Aston Villa       5    7    8    9   11   12   14
+Newcastle         2    3    5    9   13   17   26
 </code></pre>
 
 <pre><code class="r">predict(md2, hdv = 1, date = as.Date(max(scores$scores$date)))
@@ -824,9 +878,9 @@ Model based on data from 2013-08-17 to 2014-05-11
 2014-05-11 Man City vs West Ham, HW 75%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
 2014-05-11 Norwich vs Arsenal, HW 10%, AW 72%, T 19%, pred score 0.6-2  actual: AW (0-2)
 2014-05-11 Southampton vs Man Utd, HW 30%, AW 44%, T 26%, pred score 1.2-1.5  actual: T (1-1)
-2014-05-11 Spurs vs Aston Villa, HW 53%, AW 23%, T 24%, pred score 1.7-1  actual: HW (3-0)
-2014-05-11 Sunderland vs Swansea, HW 26%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
-2014-05-11 West Brom vs Stoke, HW 31%, AW 41%, T 28%, pred score 1.1-1.3  actual: AW (1-2)
+2014-05-11 Spurs vs Aston Villa, HW 52%, AW 23%, T 25%, pred score 1.7-1  actual: HW (3-0)
+2014-05-11 Sunderland vs Swansea, HW 27%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
+2014-05-11 West Brom vs Stoke, HW 32%, AW 41%, T 27%, pred score 1.1-1.3  actual: AW (1-2)
 </code></pre>
 
 <pre><code class="r">pr2 &lt;- predict(md2, hdv = 1)
@@ -837,36 +891,36 @@ Model based on data from 2013-08-17 to 2014-05-11
 ---------------------------------------------
 2013-08-17 Swansea vs Man Utd, HW 26%, AW 50%, T 24%, pred score 1.2-1.7  actual: AW (1-4)
 2013-08-17 West Ham vs Cardiff, HW 52%, AW 21%, T 27%, pred score 1.5-0.8  actual: HW (2-0)
-2013-08-18 Crystal Palace vs Spurs, HW 24%, AW 47%, T 29%, pred score 0.8-1.3  actual: AW (0-1)
+2013-08-18 Crystal Palace vs Spurs, HW 24%, AW 47%, T 28%, pred score 0.8-1.3  actual: AW (0-1)
 2013-08-25 Cardiff vs Man City, HW 3%, AW 90%, T 7%, pred score 0.6-3.7  actual: HW (3-2)
 2013-09-01 Arsenal vs Spurs, HW 51%, AW 25%, T 24%, pred score 1.7-1.1  actual: HW (1-0)
 2013-09-21 West Ham vs Everton, HW 19%, AW 55%, T 26%, pred score 0.8-1.5  actual: AW (2-3)
-2013-11-02 Man City vs Norwich, HW 86%, AW 4%, T 10%, pred score 3.1-0.6  actual: HW (7-0)
+2013-11-02 Man City vs Norwich, HW 87%, AW 4%, T 10%, pred score 3.1-0.6  actual: HW (7-0)
 2013-11-03 Cardiff vs Swansea, HW 16%, AW 63%, T 21%, pred score 0.9-2  actual: HW (1-0)
 2013-11-30 West Ham vs Fulham, HW 52%, AW 24%, T 24%, pred score 1.7-1  actual: HW (3-0)
 2013-12-01 Chelsea vs Southampton, HW 58%, AW 17%, T 25%, pred score 1.6-0.7  actual: HW (3-1)
-2013-12-08 Arsenal vs Everton, HW 39%, AW 35%, T 26%, pred score 1.3-1.3  actual: T (1-1)
-2013-12-26 Cardiff vs Southampton, HW 14%, AW 65%, T 21%, pred score 0.8-2  actual: AW (0-3)
-2013-12-28 West Ham vs West Brom, HW 38%, AW 34%, T 29%, pred score 1.2-1.1  actual: T (3-3)
-2014-01-18 Liverpool vs Aston Villa, HW 77%, AW 9%, T 13%, pred score 3-1  actual: T (2-2)
+2013-12-08 Arsenal vs Everton, HW 38%, AW 35%, T 26%, pred score 1.3-1.3  actual: T (1-1)
+2013-12-26 Cardiff vs Southampton, HW 14%, AW 66%, T 21%, pred score 0.8-2  actual: AW (0-3)
+2013-12-28 West Ham vs West Brom, HW 37%, AW 34%, T 29%, pred score 1.2-1.1  actual: T (3-3)
+2014-01-18 Liverpool vs Aston Villa, HW 78%, AW 10%, T 13%, pred score 3-1  actual: T (2-2)
 2014-01-18 Man City vs Cardiff, HW 90%, AW 3%, T 7%, pred score 3.7-0.6  actual: HW (4-2)
-2014-01-18 Norwich vs Hull, HW 23%, AW 46%, T 31%, pred score 0.7-1.2  actual: HW (1-0)
+2014-01-18 Norwich vs Hull, HW 23%, AW 45%, T 31%, pred score 0.7-1.2  actual: HW (1-0)
 2014-03-15 Stoke vs West Ham, HW 38%, AW 33%, T 29%, pred score 1.1-1  actual: HW (3-1)
 2014-03-15 Swansea vs West Brom, HW 47%, AW 28%, T 25%, pred score 1.6-1.2  actual: AW (1-2)
 2014-03-16 Man Utd vs Liverpool, HW 30%, AW 50%, T 20%, pred score 1.7-2.2  actual: AW (0-3)
-2014-03-22 Hull vs West Brom, HW 35%, AW 37%, T 29%, pred score 1.1-1.1  actual: HW (2-0)
-2014-04-06 Everton vs Arsenal, HW 35%, AW 38%, T 27%, pred score 1.3-1.3  actual: HW (3-0)
-2014-04-26 West Brom vs West Ham, HW 34%, AW 38%, T 28%, pred score 1.1-1.2  actual: HW (1-0)
-2014-04-26 Man Utd vs Norwich, HW 69%, AW 11%, T 21%, pred score 1.9-0.6  actual: HW (4-0)
+2014-03-22 Hull vs West Brom, HW 35%, AW 36%, T 29%, pred score 1.1-1.1  actual: HW (2-0)
+2014-04-06 Everton vs Arsenal, HW 35%, AW 39%, T 26%, pred score 1.3-1.3  actual: HW (3-0)
+2014-04-26 West Brom vs West Ham, HW 34%, AW 37%, T 29%, pred score 1.1-1.2  actual: HW (1-0)
+2014-04-26 Man Utd vs Norwich, HW 69%, AW 11%, T 20%, pred score 1.9-0.6  actual: HW (4-0)
 2014-05-11 Cardiff vs Chelsea, HW 5%, AW 82%, T 13%, pred score 0.4-2.5  actual: AW (1-2)
-2014-05-11 Fulham vs Crystal Palace, HW 26%, AW 46%, T 27%, pred score 1-1.4  actual: T (2-2)
-2014-05-11 Hull vs Everton, HW 17%, AW 57%, T 25%, pred score 0.7-1.6  actual: AW (0-2)
-2014-05-11 Liverpool vs Newcastle, HW 74%, AW 11%, T 14%, pred score 3-1.1  actual: HW (2-1)
+2014-05-11 Fulham vs Crystal Palace, HW 27%, AW 46%, T 27%, pred score 1-1.4  actual: T (2-2)
+2014-05-11 Hull vs Everton, HW 18%, AW 57%, T 25%, pred score 0.7-1.6  actual: AW (0-2)
+2014-05-11 Liverpool vs Newcastle, HW 74%, AW 12%, T 14%, pred score 3-1.1  actual: HW (2-1)
 2014-05-11 Man City vs West Ham, HW 76%, AW 9%, T 15%, pred score 2.5-0.8  actual: HW (2-0)
-2014-05-11 Norwich vs Arsenal, HW 10%, AW 72%, T 19%, pred score 0.6-2  actual: AW (0-2)
+2014-05-11 Norwich vs Arsenal, HW 10%, AW 71%, T 19%, pred score 0.6-2  actual: AW (0-2)
 2014-05-11 Southampton vs Man Utd, HW 30%, AW 44%, T 26%, pred score 1.2-1.5  actual: T (1-1)
 2014-05-11 Spurs vs Aston Villa, HW 53%, AW 23%, T 24%, pred score 1.7-1  actual: HW (3-0)
-2014-05-11 Sunderland vs Swansea, HW 27%, AW 49%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
+2014-05-11 Sunderland vs Swansea, HW 27%, AW 48%, T 25%, pred score 1.1-1.6  actual: AW (1-3)
 2014-05-11 West Brom vs Stoke, HW 32%, AW 41%, T 27%, pred score 1.1-1.3  actual: AW (1-2)
 </code></pre>
 
@@ -876,27 +930,48 @@ sim3 &lt;- simulate(md3, venue = &quot;Cardiff City Stadium&quot;)
 </code></pre>
 
 <pre><code>
-               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th 14th 15th 16th 17th 18th 19th 20th
-Cardiff          0   0   0   0   0   0   0   0   1    1    1    0    1    6   13   21   24   19   10    3
-Man City        16  13  11  10   8   7   6   5   4    4    3    3    2    2    2    1    1    1    1    1
-Everton          6   6   6   6   6   6   6   6   6    6    6    6    5    5    4    3    3    3    3    3
-Spurs            5   5   6   6   6   6   6   6   6    6    6    5    5    5    4    4    4    4    4    4
-Newcastle        3   3   3   4   4   5   5   5   5    6    6    6    6    6    6    5    5    5    6    6
-Swansea          4   5   5   5   5   5   5   6   6    6    6    6    6    5    5    4    4    4    4    4
-Man Utd          8   8   8   7   7   7   6   6   5    5    5    4    4    4    3    3    3    2    2    2
-Arsenal         10   9   9   8   8   7   7   6   5    5    4    4    3    3    3    2    2    2    2    2
-West Brom        3   3   4   4   4   5   5   5   5    5    6    6    6    6    5    5    5    5    6    6
-Southampton      5   5   5   5   5   5   6   6   6    6    6    6    6    5    5    4    3    3    4    4
-Sunderland       3   3   3   4   4   4   5   5   5    5    6    6    6    6    5    5    5    6    6    7
-West Ham         2   3   3   3   4   4   4   5   5    6    6    7    7    7    6    5    5    5    6    7
-Norwich          1   2   2   2   3   3   3   4   4    5    5    6    6    6    6    6    7    8    9   11
-Aston Villa      2   2   3   3   4   4   4   5   5    5    6    6    6    6    6    5    5    6    7    8
-Hull             2   3   3   4   4   4   5   5   5    6    6    6    6    6    6    5    5    5    6    7
-Fulham           2   2   2   3   3   4   4   4   4    5    5    5    6    6    6    6    7    8    9   10
-Liverpool       14  12  12  11  10   8   7   5   4    3    3    2    2    2    1    1    1    1    1    1
-Crystal Palace   2   2   2   3   3   4   4   5   5    6    6    6    7    7    7    6    5    6    7    8
-Stoke            4   4   4   5   5   5   6   5   5    6    6    6    6    5    5    4    4    5    5    5
-Chelsea         10  10   9   8   7   6   6   6   6    5    5    5    4    3    3    2    2    1    2    1
+               1st 2nd 3rd 4th 5th 6th 7th 8th 9th 10th 11th 12th 13th
+Cardiff          0   0   0   0   0   0   0   0   1    1    1    0    1
+Man City        17  13  11   9   8   7   6   5   4    4    3    3    2
+Everton          6   6   6   6   6   6   6   6   6    6    6    6    5
+Spurs            5   5   6   6   6   6   6   6   6    6    6    5    5
+Newcastle        3   3   3   4   4   4   5   5   5    5    6    6    6
+Swansea          4   5   5   5   5   5   5   6   6    6    6    6    6
+Man Utd          8   8   8   7   7   7   7   6   6    5    5    5    4
+Arsenal         10   9   9   8   8   7   7   6   5    5    4    4    3
+West Brom        3   3   4   4   4   5   5   5   5    5    6    6    6
+Southampton      5   5   5   5   5   6   6   6   6    6    6    6    6
+Sunderland       2   3   3   4   4   4   5   5   5    5    6    6    6
+West Ham         2   3   3   3   4   4   4   5   6    6    6    7    7
+Norwich          1   2   2   2   3   3   3   4   4    5    5    6    6
+Aston Villa      2   2   3   3   4   4   4   5   5    5    6    6    6
+Hull             2   3   3   4   4   4   5   5   5    6    6    6    6
+Fulham           2   2   2   3   3   4   4   4   4    5    5    5    6
+Liverpool       14  12  12  11  10   8   7   5   4    3    3    2    2
+Crystal Palace   2   2   2   3   3   4   4   5   5    6    6    7    7
+Stoke            4   4   5   5   5   5   5   5   5    6    6    6    6
+Chelsea         10  10   8   8   7   6   6   6   6    5    5    4    4
+               14th 15th 16th 17th 18th 19th 20th
+Cardiff           6   13   21   24   19   10    3
+Man City          2    2    1    1    1    1    1
+Everton           5    4    3    3    3    3    3
+Spurs             5    4    4    4    4    4    4
+Newcastle         6    5    5    5    5    6    7
+Swansea           5    5    4    4    4    4    5
+Man Utd           4    3    3    2    2    2    2
+Arsenal           3    2    2    2    2    2    2
+West Brom         6    5    5    5    5    6    6
+Southampton       5    5    4    3    4    4    4
+Sunderland        6    6    5    5    6    6    7
+West Ham          7    6    5    5    5    6    7
+Norwich           6    6    6    7    8   10   11
+Aston Villa       6    6    5    5    6    7    8
+Hull              6    6    5    5    6    6    7
+Fulham            6    6    6    7    8    9   10
+Liverpool         2    1    1    1    1    1    1
+Crystal Palace    7    7    6    5    6    7    8
+Stoke             5    5    4    4    5    5    5
+Chelsea           3    3    2    2    1    1    2
 </code></pre>
 
 <pre><code class="r">predict(md3, venue = &quot;Cardiff City Stadium&quot;, date = as.Date(max(scores$scores$date)))
@@ -918,21 +993,147 @@ Model based on data from 2013-08-17 to 2014-05-11
 2013-08-31 Cardiff vs Everton, HW 10%, AW 70%, T 20%, pred score 0.6-2  actual: T (0-0)
 2013-09-22 Cardiff vs Spurs, HW 15%, AW 65%, T 20%, pred score 0.9-2.1  actual: AW (0-1)
 2013-10-05 Cardiff vs Newcastle, HW 23%, AW 52%, T 25%, pred score 1-1.6  actual: AW (1-2)
-2013-11-03 Cardiff vs Swansea, HW 16%, AW 62%, T 22%, pred score 0.8-1.9  actual: HW (1-0)
+2013-11-03 Cardiff vs Swansea, HW 16%, AW 61%, T 22%, pred score 0.8-1.9  actual: HW (1-0)
 2013-11-24 Cardiff vs Man Utd, HW 9%, AW 76%, T 15%, pred score 0.8-2.5  actual: T (2-2)
-2013-11-30 Cardiff vs Arsenal, HW 7%, AW 80%, T 13%, pred score 0.8-2.9  actual: AW (0-3)
+2013-11-30 Cardiff vs Arsenal, HW 8%, AW 80%, T 13%, pred score 0.8-2.9  actual: AW (0-3)
 2013-12-14 Cardiff vs West Brom, HW 23%, AW 52%, T 25%, pred score 1-1.6  actual: HW (1-0)
 2013-12-26 Cardiff vs Southampton, HW 14%, AW 64%, T 22%, pred score 0.7-1.8  actual: AW (0-3)
 2013-12-28 Cardiff vs Sunderland, HW 25%, AW 51%, T 25%, pred score 1.1-1.6  actual: T (2-2)
 2014-01-11 Cardiff vs West Ham, HW 21%, AW 50%, T 28%, pred score 0.8-1.3  actual: AW (0-2)
-2014-02-01 Cardiff vs Norwich, HW 36%, AW 38%, T 27%, pred score 1.2-1.3  actual: HW (2-1)
-2014-02-11 Cardiff vs Aston Villa, HW 26%, AW 47%, T 26%, pred score 1-1.5  actual: T (0-0)
+2014-02-01 Cardiff vs Norwich, HW 35%, AW 38%, T 27%, pred score 1.2-1.3  actual: HW (2-1)
+2014-02-11 Cardiff vs Aston Villa, HW 26%, AW 48%, T 26%, pred score 1-1.5  actual: T (0-0)
 2014-02-22 Cardiff vs Hull, HW 23%, AW 51%, T 25%, pred score 1-1.6  actual: AW (0-4)
 2014-03-08 Cardiff vs Fulham, HW 35%, AW 41%, T 24%, pred score 1.4-1.6  actual: HW (3-1)
 2014-03-22 Cardiff vs Liverpool, HW 4%, AW 89%, T 7%, pred score 0.9-4  actual: AW (3-6)
-2014-04-05 Cardiff vs Crystal Palace, HW 24%, AW 46%, T 30%, pred score 0.8-1.2  actual: AW (0-3)
-2014-04-19 Cardiff vs Stoke, HW 19%, AW 59%, T 22%, pred score 1-1.8  actual: T (1-1)
+2014-04-05 Cardiff vs Crystal Palace, HW 24%, AW 47%, T 29%, pred score 0.8-1.2  actual: AW (0-3)
+2014-04-19 Cardiff vs Stoke, HW 19%, AW 58%, T 23%, pred score 1-1.8  actual: T (1-1)
 2014-05-11 Cardiff vs Chelsea, HW 5%, AW 81%, T 14%, pred score 0.4-2.4  actual: AW (1-2)
+</code></pre>
+
+<p>Preview the predicted model, there will prob of home win, draw, away win, home attack defence index and vice verse, residuls etc.</p>
+
+<pre><code class="r"># Preview the models
+attributes(pr1)
+</code></pre>
+
+<pre><code>$names
+[1] &quot;scores&quot;         &quot;home.score&quot;     &quot;away.score&quot;     &quot;home.goals.sum&quot;
+[5] &quot;home.goals&quot;     &quot;away.goals.sum&quot; &quot;away.goals&quot;    
+</code></pre>
+
+<pre><code class="r">head(pr1$scores)
+</code></pre>
+
+<pre><code>      x       date  home.team   away.team            venue home.score
+374 374 2013-08-17  Liverpool       Stoke          Anfield          1
+375 375 2013-08-17    Norwich     Everton      Carrow Road          2
+376 376 2013-08-17 Sunderland      Fulham Stadium of Light          0
+377 377 2013-08-17  West Brom Southampton    The Hawthorns          0
+378 378 2013-08-17    Arsenal Aston Villa Emirates Stadium          1
+379 379 2013-08-17    Swansea     Man Utd  Liberty Stadium          1
+    away.score hdv home.residuals away.residuals pred.home.score
+374          0   0     -1.6144627     -1.1851193       2.6144627
+375          2   0      1.4435742      0.1724536       0.5564258
+376          1   0     -1.7403878     -0.2292109       1.7403878
+377          1   0     -0.9991654     -0.5730564       0.9991654
+378          3   0     -1.0310349      2.1796430       2.0310349
+379          4   1     -0.1793558      2.2794901       1.1793558
+    pred.away.score home.attack home.defend away.attack away.defend
+374        1.185119   0.7458438   0.2334077 -0.06356428   0.2152148
+375        1.827546  -0.5290459   0.3745846  0.22838968  -0.0571755
+376        1.229211  -0.1488850   0.3546618 -0.14828936   0.7029929
+377        1.573056  -0.1021396   0.3398163  0.11320419   0.1013047
+378        0.820357   0.3393157   0.0000000 -0.19801562   0.3692298
+379        1.720510   0.1212422   0.2620823  0.28053841   0.0437262
+    home.win away.win    tie home.shutout away.shutout
+374   68.010   15.240 16.750        7.245       30.565
+375   10.554   68.346 21.100       57.259       15.876
+376   49.185   27.274 23.541       17.465       29.094
+377   24.079   50.696 25.225       36.975       20.705
+378   65.726   14.093 20.181       13.084       44.127
+379   26.270   50.039 23.691       30.653       17.921
+</code></pre>
+
+<pre><code class="r">attributes(pr2)
+</code></pre>
+
+<pre><code>$names
+[1] &quot;scores&quot;         &quot;home.score&quot;     &quot;away.score&quot;     &quot;home.goals.sum&quot;
+[5] &quot;home.goals&quot;     &quot;away.goals.sum&quot; &quot;away.goals&quot;    
+</code></pre>
+
+<pre><code class="r">head(pr2$scores)
+</code></pre>
+
+<pre><code>      x       date      home.team away.team                venue
+379 379 2013-08-17        Swansea   Man Utd      Liberty Stadium
+380 380 2013-08-17       West Ham   Cardiff        Boleyn Ground
+372 372 2013-08-18 Crystal Palace     Spurs        Selhurst Park
+361 361 2013-08-25        Cardiff  Man City Cardiff City Stadium
+353 353 2013-09-01        Arsenal     Spurs     Emirates Stadium
+340 340 2013-09-21       West Ham   Everton        Boleyn Ground
+    home.score away.score hdv home.residuals away.residuals
+379          1          4   1     -0.1793558      2.2794901
+380          2          0   1      0.5475268     -0.8249034
+372          0          1   1     -0.8415656     -0.2966450
+361          3          2   1      2.3632476     -1.6617036
+353          1          0   1     -0.7247497     -1.1463926
+340          2          3   1      1.2131914      1.4792919
+    pred.home.score pred.away.score home.attack home.defend away.attack
+379       1.1793558       1.7205099   0.1212422   0.2620823   0.2805384
+380       1.4524732       0.8249034  -0.1825947   0.1907864  -0.3832755
+372       0.8415656       1.2966450  -0.3782576   0.1231600   0.1366201
+361       0.6367524       3.6617036  -0.3832755   0.5558625   0.7420660
+353       1.7247497       1.1463926   0.3393157   0.0000000   0.1366201
+340       0.7868086       1.5207081  -0.1825947   0.1907864   0.2283897
+    away.defend home.win away.win    tie home.shutout away.shutout
+379  0.04372620   26.145   50.132 23.723       30.905       17.941
+380  0.55586251   52.021   20.951 27.028       23.428       44.231
+372  0.20576630   24.251   47.259 28.490       42.934       27.317
+361 -0.06809888    2.974   90.144  6.882       53.067        2.560
+353  0.20576630   50.724   25.469 23.807       17.863       31.587
+340 -0.05717550   19.250   54.739 26.011       45.787       21.892
+</code></pre>
+
+<pre><code class="r">attributes(pr2)
+</code></pre>
+
+<pre><code>$names
+[1] &quot;scores&quot;         &quot;home.score&quot;     &quot;away.score&quot;     &quot;home.goals.sum&quot;
+[5] &quot;home.goals&quot;     &quot;away.goals.sum&quot; &quot;away.goals&quot;    
+</code></pre>
+
+<pre><code class="r">head(pr2$scores)
+</code></pre>
+
+<pre><code>      x       date      home.team away.team                venue
+379 379 2013-08-17        Swansea   Man Utd      Liberty Stadium
+380 380 2013-08-17       West Ham   Cardiff        Boleyn Ground
+372 372 2013-08-18 Crystal Palace     Spurs        Selhurst Park
+361 361 2013-08-25        Cardiff  Man City Cardiff City Stadium
+353 353 2013-09-01        Arsenal     Spurs     Emirates Stadium
+340 340 2013-09-21       West Ham   Everton        Boleyn Ground
+    home.score away.score hdv home.residuals away.residuals
+379          1          4   1     -0.1793558      2.2794901
+380          2          0   1      0.5475268     -0.8249034
+372          0          1   1     -0.8415656     -0.2966450
+361          3          2   1      2.3632476     -1.6617036
+353          1          0   1     -0.7247497     -1.1463926
+340          2          3   1      1.2131914      1.4792919
+    pred.home.score pred.away.score home.attack home.defend away.attack
+379       1.1793558       1.7205099   0.1212422   0.2620823   0.2805384
+380       1.4524732       0.8249034  -0.1825947   0.1907864  -0.3832755
+372       0.8415656       1.2966450  -0.3782576   0.1231600   0.1366201
+361       0.6367524       3.6617036  -0.3832755   0.5558625   0.7420660
+353       1.7247497       1.1463926   0.3393157   0.0000000   0.1366201
+340       0.7868086       1.5207081  -0.1825947   0.1907864   0.2283897
+    away.defend home.win away.win    tie home.shutout away.shutout
+379  0.04372620   26.145   50.132 23.723       30.905       17.941
+380  0.55586251   52.021   20.951 27.028       23.428       44.231
+372  0.20576630   24.251   47.259 28.490       42.934       27.317
+361 -0.06809888    2.974   90.144  6.882       53.067        2.560
+353  0.20576630   50.724   25.469 23.807       17.863       31.587
+340 -0.05717550   19.250   54.739 26.011       45.787       21.892
 </code></pre>
 
 <p>Apply anova to compare the models</p>
@@ -947,14 +1148,38 @@ anova(md1, md2, md3, test = &quot;Chisq&quot;)
 <pre><code>Error in UseMethod(&quot;anova&quot;): no applicable method for &#39;anova&#39; applied to an object of class &quot;fbRanks&quot;
 </code></pre>
 
-<pre><code class="r"># run shiny apps runApp(&#39;Myapp&#39;, display.mode=&#39;showcase&#39;)
+<pre><code class="r">attributes(rsd1)
 </code></pre>
 
-<p>You can also embed plots, for example:</p>
+<pre><code>$names
+ [1] &quot;Arsenal&quot;        &quot;Aston Villa&quot;    &quot;Cardiff&quot;        &quot;Chelsea&quot;       
+ [5] &quot;Crystal Palace&quot; &quot;Everton&quot;        &quot;Fulham&quot;         &quot;Hull&quot;          
+ [9] &quot;Liverpool&quot;      &quot;Man City&quot;       &quot;Man Utd&quot;        &quot;Newcastle&quot;     
+[13] &quot;Norwich&quot;        &quot;Southampton&quot;    &quot;Spurs&quot;          &quot;Stoke&quot;         
+[17] &quot;Sunderland&quot;     &quot;Swansea&quot;        &quot;West Brom&quot;      &quot;West Ham&quot;      
+</code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAtAAAAGwCAMAAAC3laJpAAAAbFBMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AZrU5AAA5ADk5AGU5OY85j9plAABlADllAGVlOQBlZjlltf2POQCPOTmPOWWPjzmPtY+P2/21ZgC1/rW1/v3ajzna24/a/v39tWX924/9/rX9/tr9/v0hhXJqAAAAJHRSTlP//////////////////////////////////////////////wBYLA0NAAAACXBIWXMAAAsSAAALEgHS3X78AAALO0lEQVR4nO3dD1fb1gHG4TrrAkshbNBtsLBg4+//HWc5JiSx7Nn6e+/r5zk9dVtO1IvyQ766VqTf1hDkt7kHAEMSNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRR+gS9gOmNGHSPXwvd9A56eb39ufjLl3M3DSPoG/Trw/329eXj1zM3DSPoG/Tq7stPr6dvGkbgCE2U3nPo1a05NOWwykEUQRNliGW7D49OChnB//2YpO3XHP/ySSeFrw83gmZwi3WHiIZZtnu6+iHoEz+EhONmCXq3bPf8+ydHaIY1S9Dr1e1N8/K8v24naPqZYw7dfdMwAkETRdBEETRRei/b3e7W6JwUUoLeR+jmU5VOm4YR9J9yrD4/dto0jMAcmiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogiaKIImiqCJImiiCJoogiaKoIkiaKIImiiCJoqgiSJoogzxnEKPRqYYHl5PlGGeU+hJshTCEZooAzyn0ByacljlIIqgiWLZjihOCokywrLd4k3PocH5HKGJYtmOKFY5iCJoogiaKIImSu9lu9vdGt3+WaGgmV7vI/Trw023TcMI+k85Vp8fO20aRmAOTRRBE0XQRBE0UQRNsbpcsSloSrVYd4hI0JSq00X1gqZUjtBEcYQmiiM0WaxycPEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFU6dOGSoKnRwUtLBX2J6n9eiKB51+nK+bIImncBQZtD8y4h6EMEfYnqn0MfJGiieDQyUTx4kygjPBr5xE3DCByhieLRyEUIXnaYmFWOEiQvDE9shKAXbzoN6CIJejBDLNtdPZty9CPowfQ+Kfzzcf18ten6DyeFPXg/G8oQy3bPN5btKIQjNFGGmEPfmENTCst2RBH0JQo+BxX0BUpeJRT0BRL0GJtmNoIeY9PMxxx6hE3DCARNFEETRdBEETRRBE0UQRNF0EQRNFEETbG6fKApaErV6ZITQVMqQRNF0GQxh6a/yi8tFTQ/qf3if0HzE0F33TRFEnTXTVMmc+iOm+ZiTPkzImjGNuksRtCMTdBEKS/obzd/brkFdJ9NU5+Ok+HC5tC751wtFvtPbuuzaapTw5LeGUfogTdNdWKCHmXTVCcn6OePX58Xi/tBN019KvjQ5bQpx+fHzV/LT04KKd2pc+jNMbo96OW1RyNTjhOnHIsPjy+tUw4Pr6coQzyn8MfX0zcNI+j9nEJHaEpyygcrd/+5PTRP/v6xizl0LxUsH1TCOnQJaljgrcQIQS/edBrQRRL0YM65lqN1yrG8vn99aL3Ow+/QyQQ9mNOO0E83m781z6jf05wUPt17eH1P3s+G0vfy0c1/fP3z0bIdhTgp6NeH7RG69fLRzeH5ZfPVl/3Dt6CZ3mlTjmaWvGibcWw8befXLV8UNNOzbEcUQV+iruegFZy7CvoCdV0lrGF1UdAXSNBjbJrZCHqMTTMfc+gRNs2JKqioh6G/O0GXrob3+e4G/+4EXTpBn73BIwQ9O0GfvcEjBD2/gubQIwzFHJrZ1PBmIWhOJmiiCJosBU3nDxF0qgriG4OgQ9UwPRiDoEMJupWgayXoVoKuljl0G0Hzgwp+SATNyWqYxgiakwmaKIImizk07yqooVHJMA8R9FRqeL9eVzPMgwQ9lUpKqWSYBwl6KpWUUskwDxL0ZCqZnFYyzEMETRRBE0XQRBE0UQR9iSo/8Tumd9DLa49Grk3tS3PH9A3aw+srJOjD3p5P6DmFFRH0YY7QNTKHPmz3JHBz6FkcKTM42mOsctTsyNwheVpxzAhBL950GhBnEPSeYYJefmp5rv0l7s6JCXpP71WO293heH8SfYm7c2rm0L8a4KRwk7IjNIUYYMqxuv34X0FThkHm0MvrllU7QTMDy3ZEEXQRCjqDK2goXQi6BAWtsRU0lE4EXYKCKipoKJ0IugQFVVTQUDoRdBEKmrgWNJQuBN2ugocA00bQrUZ44639vbwSgm4l6FoJupWgayXodpXMoSe+2q6C0wBB12zi66FreJMRdM0EvUfQNRP0HkFXzRz6V4ImiqCJImiiCJoogiaKoM/nZhgFE/TZ3K6oZII+m6BLJuizCbpkgj6fOXTBBN1u4stHu36NXwm61cQX+Hf9GnsE3UrQtRJ0K0HXStDtOk5cx5gnm0OfQ9BDcjSdnaCHJOjZCXpIgp6doAdlvju3hKBVxHe9g15ez/1oZO/zvOsbdAEPrxc07/oGvbr78tPr6ZsejKB5F3CENofmXe859O7ZyDPOoUtyoXd3KUjCKkc5LvX+WwUZIejFm04DqpqgZzfEst2Hx1lPCgsi6NkNcVL4+nATF/QIV9t1dZHvdZ0Ns2z3dBUWtMNirQZatnv+/ZOgKcAAy3Y3zcvz/rpdzUEcDdocoGCW7dodu1XBuvLvLVp60GPcjmBdyPdGi/CgraNdGkF32Kg5dLkETZTwoB1NL0160BPz8zM3QQ/JDGd2gh6SoGcn6CEJenaCHpQ59NwETRRBE0XQRBE0USYPuqDTpoKGwlCmDrqgha2ChsJgBE0UQRPFHJooVjmIImiiCJoogiaKoIkiaKIImiiCJoqgiZIQtE/8+C4gaNdk8E7QRBE0UQKCNofm3SVfPkqgC77An0SCJoqgiWIOTZTeQS+vtw+q339MoQMxM+gb9O5JsuuXj1/P3DSMoG/Qb8/4/uFZ34s3PYcG53OEJkrvOfTq1hyaciR89A3fCZoogibKmEHD9MYLuoOCDuqG0qb6oQi6AIbSRtDnMZQ21Q9F0AUwlDaCPo+htKl+KIIugKG0EfR5DKVN9UOZOGgYl6CJImiiCJoogiaKoIkiaKIImiiCJoqgiTJl0M+L1j88PoPlpy/bP86+f2uGeYZSwp5p7pB1X8Ze2Q2l016ZMuin+wn/Z8e8NPupueHI81URQylhz6w+P66Xf3ssYa/shtJtr0wY9Oufj9P9z455+vDvzWGxuRXU9vA4/1BK2DMvTcVP9yXsld1Quu2VCYPe3rFm/kNRo/ktW/7xdXssKGAopeyZze4oZK80Y+i2VyYMunkXKeFYtP5WUXNvswJ+67Y/W2XsmdeHm1L2SjOUbntl6lWOAmaL6+KO0Fuz75nV7c26kL2yHcrW2XvlcoMuYba4Lijo5XUzgCL2yrehbJUcdPNu9vrP2QtqNL9lzbva3Ofz6/fZz9x7ZhdRCXtlN5Rue2XidegPc7+ZfVPgOvTce+Z5e1ei+xL2yttQOu0VnxQSRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBF6C5oRzDEHQBBD0cQU/hZXtf2NXdv7Z/Ln91u73l6PvLX/8u6KEIegLN7Yierzbpfvz6smn46du9XN5fXkq4U2MIQU9gd7O41e19c/fB5t82ib+93H0x5RiQoKewvG7mGtuun+63t4n98Lh72d45ae772gUR9ERePn5tgm6O0Hfb+7X98OIIPRxBT6C57WAT9O3V9h+fbn59MYcejKCn8PRtlePzP95WOX54eX2wyjEgQU9n/huJXwBBT0fQExA0UQRNFEETRdBEETRRBE0UQRNF0EQRNFEETRRBE0XQRBE0UQRNFEETRdBE+R9NqIm9TiozfgAAAABJRU5ErkJggg==" title="plot of chunk unnamed-chunk-5" alt="plot of chunk unnamed-chunk-5" style="display: block; margin: auto;" /></p>
+<pre><code class="r">attributes(rsd2)
+</code></pre>
 
-<p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
+<pre><code>$names
+ [1] &quot;Arsenal&quot;        &quot;Aston Villa&quot;    &quot;Cardiff&quot;        &quot;Chelsea&quot;       
+ [5] &quot;Crystal Palace&quot; &quot;Everton&quot;        &quot;Fulham&quot;         &quot;Hull&quot;          
+ [9] &quot;Liverpool&quot;      &quot;Man City&quot;       &quot;Man Utd&quot;        &quot;Newcastle&quot;     
+[13] &quot;Norwich&quot;        &quot;Southampton&quot;    &quot;Spurs&quot;          &quot;Stoke&quot;         
+[17] &quot;Sunderland&quot;     &quot;Swansea&quot;        &quot;West Brom&quot;      &quot;West Ham&quot;      
+</code></pre>
+
+<pre><code class="r">attributes(rsd3)
+</code></pre>
+
+<pre><code>$names
+ [1] &quot;Arsenal&quot;        &quot;Aston Villa&quot;    &quot;Cardiff&quot;        &quot;Chelsea&quot;       
+ [5] &quot;Crystal Palace&quot; &quot;Everton&quot;        &quot;Fulham&quot;         &quot;Hull&quot;          
+ [9] &quot;Liverpool&quot;      &quot;Man City&quot;       &quot;Man Utd&quot;        &quot;Newcastle&quot;     
+[13] &quot;Norwich&quot;        &quot;Southampton&quot;    &quot;Spurs&quot;          &quot;Stoke&quot;         
+[17] &quot;Sunderland&quot;     &quot;Swansea&quot;        &quot;West Brom&quot;      &quot;West Ham&quot;      
+</code></pre>
 
 </body>
 

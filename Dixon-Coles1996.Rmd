@@ -17,6 +17,8 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
+setwd(mydir)
 
 # get the English Premier League 2013/2014 from official website
 url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.scoresSeason')
@@ -52,6 +54,8 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
+setwd(mydir)
 
 # Load soccer matches scoresa
 load('~/scores.Rda')
@@ -123,6 +127,19 @@ predict(md3, venue='Cardiff City Stadium', date=as.Date(max(scores$scores$date))
 pr3 <- predict(md3, venue='Cardiff City Stadium')
 ```
 
+Preview the predicted model, there will prob of home win, draw, away win, home attack defence index and vice verse, residuls etc.
+```{r}
+# Preview the models
+attributes(pr1)
+head(pr1$scores)
+
+attributes(pr2)
+head(pr2$scores)
+
+attributes(pr2)
+head(pr2$scores)
+```
+
 Apply anova to compare the models
 ```{r}
 #Show the predicted versus actual scores
@@ -131,15 +148,7 @@ rsd2 <- residuals(md2)
 rsd3 <- residuals(md3)
 anova (md1,md2,md3, test='Chisq')
 
-# run shiny apps
-#runApp('Myapp', display.mode="showcase")
-
+attributes(rsd1)
+attributes(rsd2)
+attributes(rsd3)
 ```
-
-You can also embed plots, for example:
-
-```{r, echo=FALSE}
-plot(cars)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

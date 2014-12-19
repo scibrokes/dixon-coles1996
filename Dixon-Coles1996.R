@@ -5,6 +5,8 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
+setwd(mydir)
 
 # get the English Premier League 2013/2014 from official website
 url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.scoresSeason')
@@ -38,6 +40,8 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
+mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
+setwd(mydir)
 
 # Load soccer matches scoresa
 load('~/scores.Rda')
@@ -109,13 +113,28 @@ predict(md3, venue='Cardiff City Stadium', date=as.Date(max(scores$scores$date))
 pr3 <- predict(md3, venue='Cardiff City Stadium')
 
 # ===============================================================================
-# apply anova to compare the models
+# Preview the models
+attributes(pr1)
+head(pr1$scores)
+
+attributes(pr2)
+head(pr2$scores)
+
+attributes(pr2)
+head(pr2$scores)
+
+# ===============================================================================
+# Apply anova to compare the models
 
 #Show the predicted versus actual scores
 rsd1 <- residuals(md1)
 rsd2 <- residuals(md2)
 rsd3 <- residuals(md3)
 anova (md1,md2,md3, test='Chisq')
+
+attributes(rsd1)
+attributes(rsd2)
+attributes(rsd3)
 
 # run shiny apps
 #runApp('Myapp', display.mode="showcase")
