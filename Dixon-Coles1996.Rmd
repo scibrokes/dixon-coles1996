@@ -1,3 +1,15 @@
+---
+title: "Dixon&Coles1996"
+author: "englianhu"
+date: "Friday, December 19, 2014"
+output: html_document
+---
+# Dixon-Coles 1996 Model
+
+This model is the basic/flat model without decay rate and also prediction for future match. However we can know the concept, theory and the algorithmic EM model. <https://github.com/englianhu/Dixon-Coles1996>
+
+Scrap the data from the English Premier League season 2013/14 official website
+```{r}
 library(shiny)
 library(shinyapps)
 library(devtools)
@@ -29,8 +41,10 @@ scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1
 rm(url, tbl, teams)
 save(scores, file='scores.Rda')
 write.csv(scores,'scores.csv')
+```
 
-# ===============================================================================
+Load data and simulate the result
+```{r}
 library(shiny)
 library(shinyapps)
 library(devtools)
@@ -47,9 +61,9 @@ teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(sco
 names(teams)[1] <- 'name'
 
 # Dixon & Coles poisson model, we can also add some more effect like weather, pitch condition, home ground advantages etc.
-md1 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date)) #without other effects
-md2 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date),add='hdv') #with home team advantage
-md3 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date),add='venue') #with venue effects
+md1 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T) #without other effects
+md2 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T) #with home team advantage
+md3 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T, add='venue') #with venue effects
 
 # -------------------------------------------------------------------------------
 # model 1 measure the team attack and defence index.
@@ -86,29 +100,46 @@ md3.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score),
                 sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
 md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
                 sd = sd(away.score), se = sd/sqrt(nrow(scores$scores)))
+```
 
-# ===============================================================================
-# Simulate the venue (home ground advantage and neutral ground), and predict a specific kick-off scores
-
+Simulate the venue (home ground advantage and neutral ground), and predict a specific kick-off scores
+```{r}
 # Simulate model 1
-# Example : predict a match kick-off on 2014-05-13
+# Example : predict a match kick-off on last match-day
 sim1 <- simulate(md1)
-predict(md1, date=as.Date('2014-05-13'))
+predict(md1, date=as.Date(max(scores$scores$date)))
+pr1 <- predict(md1)
 
 # Simulate model 2
+# Example : predict a match kick-off at home ground on last match-day
 sim2 <- simulate(md2, hdv=1)
-#Extra arguments (besides team and venue) passed in should correspond to columns in the team or match files.
-#The following extra arguments are not in the team or match files (names are not case sensitive): hvd
-predict(md2, hdv=1, date=as.Date('2014-05-13'))
+predict(md2, hdv=1, date=as.Date(max(scores$scores$date)))
+pr2 <- predict(md2, hdv=1)
 
 # Simulate model 3
-# Example : predict a match kick-off at Cardiff City Stadium on 2014-05-13
+# Example : predict a match kick-off at Cardiff City Stadium on last match-day
 sim3 <- simulate(md3, venue='Cardiff City Stadium')
-predict(md3, venue='Cardiff City Stadium', date=as.Date('2014-05-13'))
+predict(md3, venue='Cardiff City Stadium', date=as.Date(max(scores$scores$date)))
+pr3 <- predict(md3, venue='Cardiff City Stadium')
+```
 
-
-# apply anova to compare the models
+Apply anova to compare the models
+```{r}
+#Show the predicted versus actual scores
+rsd1 <- residuals(md1)
+rsd2 <- residuals(md2)
+rsd3 <- residuals(md3)
+anova (md1,md2,md3, test='Chisq')
 
 # run shiny apps
 #runApp('Myapp', display.mode="showcase")
 
+```
+
+You can also embed plots, for example:
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
