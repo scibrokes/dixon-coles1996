@@ -43,13 +43,13 @@ library(dplyr)
 load('~/scores.Rda')
 #scores <- read.csv('scores.csv')
 scores <- create.fbRanks.dataframes('scores.csv')
-teams <- scores$scores[order(scores$scores$scores, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
+teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
 
 # Dixon & Coles poisson model, we can also add some more effect like weather, pitch condition, home ground advantages etc.
-md1 <- rank.teams(scores$scores, min.scores=min(scores$scores$scores),max.scores=max(scores$scores$scores)) #without other effects
-md2 <- rank.teams(scores$scores, min.scores=min(scores$scores$scores),max.scores=max(scores$scores$scores),add='hdv') #with home team advantage
-md3 <- rank.teams(scores$scores, min.scores=min(scores$scores$scores),max.scores=max(scores$scores$scores),add='venue') #with venue effects
+md1 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date)) #without other effects
+md2 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date),add='hdv') #with home team advantage
+md3 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date),add='venue') #with venue effects
 
 # -------------------------------------------------------------------------------
 # model 1 measure the team attack and defence index.
@@ -58,10 +58,10 @@ md1.def <- coef(md1$fit$cluster.1)[-seq(1,nrow(md1$teams))]
 md1.tbl <- data.frame(coef(md1))[c(1:nrow(scores$teams)),-1]; names(md1.tbl) <- c('attack','defence')
 md1.tbl <- data.frame(team=sort(as.character(teams$name)),md1.tbl)
 md1.tbl$attack <- exp(md1.tbl$attack); md1.tbl$defence <- exp(md1.tbl$defence); row.names(md1.tbl) <- NULL
-md1.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.scores), mean = mean(home.scores),
-                sd = sd(home.scores), se = sd/sqrt(nrow(scores$scores)))
-md1.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.scores), mean  = mean(away.scores),
-                sd = sd(away.scores), se = sd/sqrt(nrow(scores$scores)))
+md1.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
+md1.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(scores$scores)))
 
 # model 2 measure the team attack, defence and home ground advantage index.
 md2.att <- coef(md2$fit$cluster.1)[1:nrow(md2$teams)]
@@ -70,10 +70,10 @@ md2.hdv <- coef(md2$fit$cluster.1)[-seq(nrow(md2$teams)*2)+1]
 md2.tbl <- data.frame(coef(md2)$coef.list); names(md2.tbl) <- c('attack','defence','hdv')
 md2.tbl <- data.frame(team=sort(as.character(teams$name)),md2.tbl)
 md2.tbl$attack <- exp(md2.tbl$attack); md2.tbl$defence <- exp(md2.tbl$defence); row.names(md2.tbl) <- NULL
-md2.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.scores), mean = mean(home.scores),
-                sd = sd(home.scores), se = sd/sqrt(nrow(scores$scores)))
-md2.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.scores), mean  = mean(away.scores),
-                sd = sd(away.scores), se = sd/sqrt(nrow(scores$scores)))
+md2.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
+md2.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(scores$scores)))
 
 # model 3 measure the team attack, defence and venue index.
 md3.att <- coef(md3$fit$cluster.1)[1:nrow(md3$teams)]
@@ -82,10 +82,10 @@ md3.hdv <- coef(md3$fit$cluster.1)[-seq(nrow(md3$teams)*2)+1]
 md3.tbl <- data.frame(coef(md3))[c(1:nrow(scores$teams)),-1]; names(md3.tbl) <- c('attack','defence')
 md3.tbl <- data.frame(team=sort(as.character(teams$name)), md3.tbl)
 md3.tbl$attack <- exp(md3.tbl$attack); md3.tbl$defence <- exp(md3.tbl$defence); row.names(md3.tbl) <- NULL
-md3.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.scores), mean = mean(home.scores),
-                sd = sd(home.scores), se = sd/sqrt(nrow(scores$scores)))
-md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.scores), mean  = mean(away.scores),
-                sd = sd(away.scores), se = sd/sqrt(nrow(scores$scores)))
+md3.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
+md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(scores$scores)))
 
 # ===============================================================================
 # Simulate the venue (home ground advantage and neutral ground), and predict a specific kick-off scores
