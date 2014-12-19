@@ -41,7 +41,7 @@ library(dplyr)
 # Load soccer matches scoresa
 load('~/scores.Rda')
 #scores <- read.csv('scores.csv')
-scores <- create.fbRanks.dataframe('scores.csv')
+scores <- create.fbRanks.dataframes('scores.csv')
 teams <- scores$scores[order(scores$scores$scores, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
 
@@ -92,18 +92,18 @@ md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.scores)
 # Simulate model 1
 # Example : predict a match kick-off on 2014-05-13
 sim1 <- simulate(md1)
-predict(md1, scores=as.Date('2014-05-13'))
+predict(md1, date=as.Date('2014-05-13'))
 
 # Simulate model 2
 sim2 <- simulate(md2, hdv=1)
 #Extra arguments (besides team and venue) passed in should correspond to columns in the team or match files.
 #The following extra arguments are not in the team or match files (names are not case sensitive): hvd
-predict(md2, hdv=1, scores=as.Date('2014-05-13'))
+predict(md2, hdv=1, date=as.Date('2014-05-13'))
 
 # Simulate model 3
 # Example : predict a match kick-off at Cardiff City Stadium on 2014-05-13
 sim3 <- simulate(md3, venue='Cardiff City Stadium')
-predict(md3, venue='Cardiff City Stadium', scores=as.Date('2014-05-13'))
+predict(md3, venue='Cardiff City Stadium', date=as.Date('2014-05-13'))
 
 
 # apply anova to compare the models
