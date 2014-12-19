@@ -1,7 +1,11 @@
 library(shiny)
+library(shinyapps)
+library(devtools)
 library(fbRanks)
 library(XML)
 library(plyr)
+library(dplyr)
+
 # get the English Premier League 2013/2014 from official website
 url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.dateSeason')
 tbl <- readHTMLTable(htmlParse(url),header='text'); tbl[[length(tbl)]] <- NULL
@@ -16,36 +20,91 @@ dat$date <- unlist(lapply(str_split(dat$date,' '),function(x) paste(x[-1],collap
 dat$date <- as.Date(dat$date, "%d%B%Y")
 attr(dat$home.team,'levels') <- levels(factor(dat$home.team))
 attr(dat$away.team,'levels') <- levels(factor(dat$away.team))
-attr(dat$venue,'levels') <- levels(factor(dat$venue))
-teams <- dat[order(dat$date, decreasing=T) & !duplicated(dat$venue),][c('home.team','venue')]
-names(teams)[1] <- 'name'
+dat$venue <- as.character(dat$venue)
 dat$hdv <- ifelse(dat$home.team==teams$name & dat$venue==teams$venue, 1, 0) # data error:only 33 matches home ground among 380 matches
 
 #match(dat$home.team,teams$name)
 #match(dat$venue,teams$venue)
 rm(url, tbl)
+save(dat, file='dat.Rda')
+write.csv(dat,'dat.csv')
 
-# Dixon & Coles poisson model
-md1 <- rank.teams(dat, min.date=min(dat$date),max.date=max(dat$date)) #without explanatory variable
-md2 <- rank.teams(dat, min.date=min(dat$date),max.date=max(dat$date),add='hdv') #with explanatory variable - home team advantage
-md3 <- rank.teams(dat, min.date=min(dat$date),max.date=max(dat$date),add='venue') #with explanatory variable - venue
+# ===============================================================================
+library(shiny)
+library(shinyapps)
+library(devtools)
+library(fbRanks)
+library(XML)
+library(plyr)
+library(dplyr)
 
+# Load soccer matches data
+load('~/dat.Rda')
+#dat <- read.csv('dat.csv')
+dat <- create.fbRanks.dataframes('dat.csv')
+teams <- dat$score[order(dat$score$date, decreasing=T) & !duplicated(dat$score$venue),][c('home.team','venue')]
+names(teams)[1] <- 'name'
+
+# Dixon & Coles poisson model, we can also add some more effect like weather, pitch condition, home ground advantages etc.
+md1 <- rank.teams(dat$score, min.date=min(dat$score$date),max.date=max(dat$score$date)) #without other effects
+md2 <- rank.teams(dat$score, min.date=min(dat$score$date),max.date=max(dat$score$date),add='hdv') #with home team advantage
+md3 <- rank.teams(dat$score, min.date=min(dat$score$date),max.date=max(dat$score$date),add='venue') #with venue effects
+
+# -------------------------------------------------------------------------------
+# model 1 measure the team attack and defence index.
 md1.att <- coef(md1$fit$cluster.1)[1:nrow(md1$teams)]
 md1.def <- coef(md1$fit$cluster.1)[-seq(1,nrow(md1$teams))]
-md1.df <- data.frame(att=exp(md1.att),def=exp(md1.def))
+md1.tbl <- data.frame(coef(md1))[c(1:nrow(dat$teams)),-1]; names(md1.tbl) <- c('attack','defence')
+md1.tbl <- data.frame(team=sort(as.character(teams$name)),md1.tbl)
+md1.tbl$attack <- exp(md1.tbl$attack); md1.tbl$defence <- exp(md1.tbl$defence); row.names(md1.tbl) <- NULL
+md1.hm <- ddply(dat$score, "home.team", summarise, score = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(dat$score)))
+md1.aw <- ddply(dat$score, "away.team", summarise, score = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(dat$score)))
 
+# model 2 measure the team attack, defence and home ground advantage index.
 md2.att <- coef(md2$fit$cluster.1)[1:nrow(md2$teams)]
 md2.def <- coef(md2$fit$cluster.1)[seq(nrow(md2$teams)+2,nrow(md2$teams)*2)-1]
 md2.hdv <- coef(md2$fit$cluster.1)[-seq(nrow(md2$teams)*2)+1]
+md2.tbl <- data.frame(coef(md2)$coef.list); names(md2.tbl) <- c('attack','defence','hdv')
+md2.tbl <- data.frame(team=sort(as.character(teams$name)),md2.tbl)
+md2.tbl$attack <- exp(md2.tbl$attack); md2.tbl$defence <- exp(md2.tbl$defence); row.names(md2.tbl) <- NULL
+md2.hm <- ddply(dat$score, "home.team", summarise, score = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(dat$score)))
+md2.aw <- ddply(dat$score, "away.team", summarise, score = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(dat$score)))
 
+# model 3 measure the team attack, defence and venue index.
 md3.att <- coef(md3$fit$cluster.1)[1:nrow(md3$teams)]
 md3.def <- coef(md3$fit$cluster.1)[seq(nrow(md3$teams)+2,nrow(md3$teams)*2)-1]
 md3.hdv <- coef(md3$fit$cluster.1)[-seq(nrow(md3$teams)*2)+1]
+md3.tbl <- data.frame(coef(md3))[c(1:nrow(dat$teams)),-1]; names(md3.tbl) <- c('attack','defence')
+md3.tbl <- data.frame(team=sort(as.character(teams$name)), md3.tbl)
+md3.tbl$attack <- exp(md3.tbl$attack); md3.tbl$defence <- exp(md3.tbl$defence); row.names(md3.tbl) <- NULL
+md3.hm <- ddply(dat$score, "home.team", summarise, score = sum(home.score), mean = mean(home.score),
+                sd = sd(home.score), se = sd/sqrt(nrow(dat$score)))
+md3.aw <- ddply(dat$score, "away.team", summarise, score = sum(away.score), mean  = mean(away.score),
+                sd = sd(away.score), se = sd/sqrt(nrow(dat$score)))
 
-# ========================
-# to be continue
-sim <- simulate(md1)
-predict(sim)
+# ===============================================================================
+# Simulate the venue (home ground advantage and neutral ground), and predict a specific kick-off date
+
+# Simulate model 1
+# Example : predict a match kick-off on 2014-05-13
+sim1 <- simulate(md1)
+predict(md1, date=as.Date('2014-05-13'))
+
+# Simulate model 2
+sim2 <- simulate(md2, hdv=1)
+#Extra arguments (besides team and venue) passed in should correspond to columns in the team or match files.
+#The following extra arguments are not in the team or match files (names are not case sensitive): hvd
+predict(md2, hdv=1, date=as.Date('2014-05-13'))
+
+# Simulate model 3
+# Example : predict a match kick-off at Cardiff City Stadium on 2014-05-13
+sim3 <- simulate(md3, venue='Cardiff City Stadium')
+predict(md3, venue='Cardiff City Stadium', date=as.Date('2014-05-13'))
+
 
 # apply anova to compare the models
 

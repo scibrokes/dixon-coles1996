@@ -1,4 +1,8 @@
-library('shiny')
+library(shiny)
+library('fbRanks')
+library('XML')
+library('plyr')
+load('dat.Rda')
 
 # Define UI for dataset viewer application
 shinyUI(pageWithSidebar(

@@ -2,24 +2,7 @@ library(shiny)
 library('fbRanks')
 library('XML')
 library('plyr')
-# get the English Premier League 2013/2014 from official website
-url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.dateSeason')
-tbl <- readHTMLTable(htmlParse(url),header='text'); tbl[[length(tbl)]] <- NULL
-tbl <- lapply(tbl,function(x) {x$V1 = x$V1[1]; x[-1,]})
-dat <- Reduce(function(x, y) merge(x, y, all = T), 
-              tbl, accumulate = F)[1:5]
-dat$HG <- as.numeric(unlist(lapply(str_split(as.character(dat$V3),'-'),function(x) x[1])))
-dat$AG <- as.numeric(unlist(lapply(str_split(as.character(dat$V3),'-'),function(x) x[2])))
-dat$V3 <- NULL
-names(dat) <- c('date','home.team','away.team','venue','home.score','away.score')
-dat$date <- unlist(lapply(str_split(dat$date,' '),function(x) paste(x[-1],collapse='')))
-dat$date <- as.Date(dat$date, "%d%B%Y")
-attr(dat$home.team,'levels') <- levels(factor(dat$home.team))
-attr(dat$away.team,'levels') <- levels(factor(dat$away.team))
-attr(dat$venue,'levels') <- levels(factor(dat$venue))
-teams <- dat[order(dat$date, decreasing=T) & !duplicated(dat$venue),][c('home.team','venue')]
-names(teams)[1] <- 'name'
-dat$hdv <- ifelse(dat$home.team==teams$name & dat$venue==teams$venue, 1, 0) # data error:only 33 matches home ground among 380 matches
+load('dat.Rda')
 
 # Define server logic required to summarize and view the selected dataset
 shinyServer(function(input, output) {
@@ -35,11 +18,11 @@ shinyServer(function(input, output) {
   #
   datasetInput <- reactive({
     switch(input$dataset,
-           "matches" = matches,
-           "teams" = teams,
-           "result" = result)
+           "matches" = dat,
+           "teams" = md1,
+           "result" = dat)
   })
-  
+
   # The output$caption is computed based on a reactive expression that
   # returns input$caption. When the user changes the "caption" field:
   #
