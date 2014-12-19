@@ -36,3 +36,5 @@ Reference:
 6) Whose prediction will be the best? http://fantasyfootballanalytics.net/2014/06/best-fantasy-football-projections-2014.html
 
 7) http://www.math.ku.dk/~rolf/teaching/thesis/DixonColes.pdf
+
+8) http://schw4rzr0tg0ld.wordpress.com
