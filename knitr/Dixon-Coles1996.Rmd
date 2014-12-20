@@ -17,8 +17,6 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
-mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
-setwd(mydir)
 
 # get the English Premier League 2013/2014 from official website
 url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.scoresSeason')
@@ -41,8 +39,8 @@ scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
 rm(url, tbl, teams)
-save(scores, file='scores.Rda')
-write.csv(scores,'scores.csv')
+save(scores, file='/data/scores.Rda')
+write.csv(scores, '/data/scores.csv')
 ```
 
 Load data and simulate the result
@@ -54,12 +52,10 @@ library(fbRanks)
 library(XML)
 library(plyr)
 library(dplyr)
-mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
-setwd(mydir)
 
-# Load soccer matches scoresa
-load('~/scores.Rda')
-#scores <- read.csv('scores.csv')
+# Load soccer matches data
+load('/data/scores.Rda')
+#scores <- read.csv('/data/scores.csv')
 scores <- create.fbRanks.dataframes('scores.csv')
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'

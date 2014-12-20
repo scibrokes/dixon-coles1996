@@ -29,8 +29,8 @@ scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
 rm(url, tbl, teams)
-save(scores, file='scores.Rda')
-write.csv(scores,'scores.csv')
+save(scores, file=paste0(mydir,'/data/scores.Rda'))
+write.csv(scores, paste0(mydir,'/data/scores.csv'))
 
 # ===============================================================================
 library(shiny)
@@ -44,8 +44,8 @@ mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996')
 setwd(mydir)
 
 # Load soccer matches data
-load('scores.Rda')
-#scores <- read.csv('scores.csv')
+load(paste0(mydir,'/data/scores.Rda')
+#scores <- read.csv(paste0(mydir,'/data/scores.csv')
 scores <- create.fbRanks.dataframes('scores.csv')
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
@@ -138,4 +138,3 @@ attributes(rsd3)
 
 # run shiny apps
 #runApp('Myapp', display.mode="showcase")
-
