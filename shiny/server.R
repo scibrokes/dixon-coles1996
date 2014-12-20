@@ -42,13 +42,18 @@ shinyServer(function(input, output) {
   output$caption <- renderText({
     input$caption
   })
-  
+
   # The output$summary depends on the datasetInput reactive expression, 
   # so will be re-executed whenever datasetInput is re-executed 
   # (i.e. whenever the input$dataset changes)
   output$summary <- renderPrint({
+<<<<<<< HEAD:shiny/server.R
     scores <- datasetInput()
     summary(scores)
+=======
+    scores$scores <- datasetInput()
+    summary(scores$scocres)
+>>>>>>> origin/master:server.R
   })
   # The output$view depends on both the databaseInput reactive expression
   # and input$obs, so will be re-executed whenever input$dataset or 

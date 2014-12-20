@@ -2,7 +2,11 @@ library(shiny)
 library('fbRanks')
 library('XML')
 library('plyr')
+<<<<<<< HEAD:shiny/ui.R
 load('scores.Rda')
+=======
+load('~/scores.Rda')
+>>>>>>> origin/master:ui.R
 #scores <- read.csv('scores.csv')
 
 # Define UI for dataset viewer application
