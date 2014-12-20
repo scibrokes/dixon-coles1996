@@ -2,7 +2,8 @@ library(shiny)
 library('fbRanks')
 library('XML')
 library('plyr')
-load('dat.Rda')
+load('~/scores.Rda')
+#scores <- read.csv('scores.csv')
 
 # Define server logic required to summarize and view the selected dataset
 shinyServer(function(input, output) {
@@ -18,9 +19,9 @@ shinyServer(function(input, output) {
   #
   datasetInput <- reactive({
     switch(input$dataset,
-           "matches" = dat,
+           "matches" = scores$scores,
            "teams" = md1,
-           "result" = dat)
+           "result" = pr1)
   })
 
   # The output$caption is computed based on a reactive expression that
