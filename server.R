@@ -19,7 +19,11 @@ shinyServer(function(input, output) {
   #
   datasetInput <- reactive({
     switch(input$dataset,
+<<<<<<< HEAD
            "matches" = scosres$scores,
+=======
+           "matches" = scores$scores,
+>>>>>>> origin/master
            "teams" = md1,
            "result" = pr1)
   })
