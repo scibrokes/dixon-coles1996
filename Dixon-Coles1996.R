@@ -43,7 +43,7 @@ library(dplyr)
 mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
 setwd(mydir)
 
-# Load soccer matches scoresa
+# Load soccer matches data
 load('~/scores.Rda')
 #scores <- read.csv('scores.csv')
 scores <- create.fbRanks.dataframes('scores.csv')
