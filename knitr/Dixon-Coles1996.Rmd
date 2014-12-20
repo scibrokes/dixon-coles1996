@@ -39,8 +39,8 @@ scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
 rm(url, tbl, teams)
-save(scores, file='/data/scores.Rda')
-write.csv(scores, '/data/scores.csv')
+save(scores, file=paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda'))
+write.csv(scores, paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
 ```
 
 Load data and simulate the result
@@ -54,9 +54,9 @@ library(plyr)
 library(dplyr)
 
 # Load soccer matches data
-load('/data/scores.Rda')
-#scores <- read.csv('/data/scores.csv')
-scores <- create.fbRanks.dataframes('scores.csv')
+load(paste0(mydir,'/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda'))
+#scores <- read.csv(paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
+scores <- create.fbRanks.dataframes(paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
 
