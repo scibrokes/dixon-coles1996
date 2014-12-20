@@ -112,14 +112,14 @@ save(pred3, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Co
 
 # ===============================================================================
 # Preview the models
-attributes(pr1)
-head(pr1$scores)
+attributes(pred1)
+head(pred1$scores)
 
-attributes(pr2)
-head(pr2$scores)
+attributes(pred2)
+head(pred2$scores)
 
-attributes(pr2)
-head(pr2$scores)
+attributes(pred2)
+head(pred2$scores)
 
 # ===============================================================================
 # Apply anova to compare the models
