@@ -44,7 +44,7 @@ mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996')
 setwd(mydir)
 
 # Load soccer matches data
-load('~/scores.Rda')
+load('scores.Rda')
 #scores <- read.csv('scores.csv')
 scores <- create.fbRanks.dataframes('scores.csv')
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]

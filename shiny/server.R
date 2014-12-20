@@ -2,7 +2,9 @@ library(shiny)
 library('fbRanks')
 library('XML')
 library('plyr')
-load('~/scores.Rda')
+mydir <- paste0(getwd(),'/GitHub/englianhu/Dixon-Coles1996') 
+setwd(mydir)
+load('scores.Rda')
 #scores <- read.csv('scores.csv')
 
 # Define server logic required to summarize and view the selected dataset
@@ -20,9 +22,9 @@ shinyServer(function(input, output) {
   datasetInput <- reactive({
     switch(input$dataset,
 <<<<<<< HEAD
-           "matches" = scosres$scores,
+           "matches" = scores,
 =======
-           "matches" = scores$scores,
+           "matches" = scores,
 >>>>>>> origin/master
            "teams" = md1,
            "result" = pr1)
@@ -45,10 +47,9 @@ shinyServer(function(input, output) {
   # so will be re-executed whenever datasetInput is re-executed 
   # (i.e. whenever the input$dataset changes)
   output$summary <- renderPrint({
-    dat <- datasetInput()
-    summary(dat)
+    scores <- datasetInput()
+    summary(scores)
   })
-  
   # The output$view depends on both the databaseInput reactive expression
   # and input$obs, so will be re-executed whenever input$dataset or 
   # input$obs is changed. 
