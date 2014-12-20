@@ -1,13 +1,12 @@
-library(shiny)
+library('shiny')
 library('fbRanks')
 library('XML')
 library('plyr')
-<<<<<<< HEAD:shiny/ui.R
-load('scores.Rda')
-=======
-load('~/scores.Rda')
->>>>>>> origin/master:ui.R
-#scores <- read.csv('scores.csv')
+library('dplyr')
+
+#load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
+scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
+#scores <- create.fbRanks.dataframes(scores)
 
 # Define UI for dataset viewer application
 shinyUI(pageWithSidebar(
