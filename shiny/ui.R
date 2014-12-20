@@ -8,15 +8,24 @@ library('dplyr')
 scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
 #scores <- create.fbRanks.dataframes(scores)
 
-# Define UI for dataset viewer application
-shinyUI(pageWithSidebar(
-  # Application title
+shinyUI(fluidPage(
+  tags$head(
+    tags$style(HTML("
+      @import url('//fonts.googleapis.com/css?family=Lobster|Cabin:400,700');
+      h1 {
+        font-family: 'Lobster', cursive;
+        font-weight: 500;
+        line-height: 1.1;
+        color: #ad1d28;
+      }
+      body {
+        background-color: #fbfef1;
+      }
+    "))
+  ),
+
   headerPanel("Dixon & Coles 1996"),
 
-  # Sidebar with controls to provide a caption, select a dataset, and 
-  # specify the number of observations to view. Note that changes made
-  # to the caption in the textInput control are updated in the output
-  # area immediately as you type
   sidebarPanel(
     textInput("caption", "Caption:", "Data Summary"),
     selectInput("dataset", "Choose a dataset:", 
