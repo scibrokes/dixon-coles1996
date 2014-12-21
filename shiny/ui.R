@@ -1,13 +1,19 @@
-library('shiny')
-library('fbRanks')
-library('XML')
-library('plyr')
-library('dplyr')
+downloadNotInstalled<-function(x){ 
+for(i in x){ 
+   if(!require(i,character.only=TRUE)){ 
+       install.packages(i,repos="http://cran.r-project.org") 
+       library(i,character.only=TRUE) 
+     } 
+   } 
+}
+requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML") 
+downloadNotInstalled(requiredPackages) 
 
-#load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-#scores <- create.fbRanks.dataframes(scores)
+#------------------------------------------------
+# Load Dixon-Coles1996.R to scrap, manage and calculate data instanatly.
+source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
 
+#------------------------------------------------
 shinyUI(fluidPage(
   tags$head(
     tags$style(HTML("
@@ -23,16 +29,61 @@ shinyUI(fluidPage(
       }
     "))
   ),
+  tags$style(type="text/css", "
+           #loadmessage {
+             position: fixed;
+             top: 0px;
+             left: 0px;
+             width: 100%;
+             padding: 5px 0px 5px 0px;
+             text-align: center;
+             font-weight: bold;
+             font-size: 100%;
+             color: #000000;
+             background-color: #CCFF66;
+             z-index: 105;
+           }
+  "),
 
   headerPanel("Dixon & Coles 1996"),
 
   sidebarPanel(
     textInput("caption", "Caption:", "Data Summary"),
     selectInput("dataset", "Choose a dataset:", 
-                choices = c("matches", "teams", "result")),
+                choices = c("teams", "pred1", "pred2", "pred3")),
+    checkboxGroupInput("table_variables", 
+                       label = h3("Residuals"), 
+                       choices = list("Model 1" = "rsd1", "Model 2" = "rsd2", "Model 3" = "rsd3"),
+                       selected = c()),
+    conditionalPanel(
+      condition = "input.table_variables.indexOf('rsd1') > -1",
+      br(),
+      checkboxGroupInput("teams_variables",
+                         label = h4("Residuals of model 1"),
+                         choices = teamslist,
+                         selected = teams$name)),
+    conditionalPanel(
+      condition = "input.table_variables.indexOf('rsd2') > -1",
+      br(),
+      checkboxGroupInput("teams_variables",
+                         label = h4("Residuals of model 2"),
+                         choices = teamslist,
+                         selected = teams$name)),
+    conditionalPanel(
+      condition = "input.table_variables.indexOf('rsd3') > -1",
+      br(),
+      checkboxGroupInput("teams_variables",
+                         label = h4("Residuals of model 3"),
+                         choices = teamslist,
+                         selected = teams$name)),
+    
     numericInput("obs", "Number of observations to view:", 10)
   ),
-  
+
+  conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                   tags$div("Loading...",id="loadmessage")
+  ),
+
   # Show the caption, a summary of the dataset and an HTML table with
   # the requested number of observations
   mainPanel(

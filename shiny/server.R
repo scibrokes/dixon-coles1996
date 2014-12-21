@@ -1,13 +1,19 @@
-library('shiny')
-library('fbRanks')
-library('XML')
-library('plyr')
-library('dplyr')
+downloadNotInstalled<-function(x){ 
+  for(i in x){ 
+    if(!require(i,character.only=TRUE)){ 
+      install.packages(i,repos="http://cran.r-project.org") 
+      library(i,character.only=TRUE) 
+    } 
+  } 
+}
+requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML") 
+downloadNotInstalled(requiredPackages) 
 
-#load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-#scores <- create.fbRanks.dataframes(scores)
+#------------------------------------------------
+# Load Dixon-Coles1996.R to scrap, manage and calculate data instanatly.
+source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
 
+#------------------------------------------------
 # Define server logic required to summarize and view the selected dataset
 shinyServer(function(input, output) {
   # By declaring datasetInput as a reactive expression we ensure that:
@@ -19,11 +25,13 @@ shinyServer(function(input, output) {
   #     identical, then the callers are not notified
   datasetInput <- reactive({
     switch(input$dataset,
-           "matches" = scores,
-           "teams" = md1,
-           "result" = pr1)
+           "teams" = teams,
+           "pred1" = pred1$scores,
+           "pred2" = pred2$scores,
+           "pred3" = pred3$scores,
+    )
   })
-
+  
   # The output$caption is computed based on a reactive expression that
   # returns input$caption. When the user changes the "caption" field:
   #  1) This expression is automatically called to recompute the output 
@@ -35,6 +43,10 @@ shinyServer(function(input, output) {
   output$caption <- renderText({
     input$caption
   })
+
+  # You can access the values of the widget (as a vector)
+  # with input$checkGroup, e.g.
+  output$table_variables <- renderPrint({ input$table_variables })
 
   # The output$summary depends on the datasetInput reactive expression, 
   # so will be re-executed whenever datasetInput is re-executed 

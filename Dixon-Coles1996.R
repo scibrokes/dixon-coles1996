@@ -1,35 +1,3 @@
-library(shiny)
-library('shinyapps')
-library('devtools')
-library('fbRanks')
-library('XML')
-library('plyr')
-library('dplyr')
-#source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
-
-# get the English Premier League 2013/2014 from official website
-url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.scoresSeason')
-tbl <- readHTMLTable(htmlParse(url),header='text'); tbl[[length(tbl)]] <- NULL
-tbl <- lapply(tbl,function(x) {x$V1 = x$V1[1]; x[-1,]})
-scores <- Reduce(function(x, y) merge(x, y, all = T), 
-       tbl, accumulate = F)[1:5]
-scores$HG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[1])))
-scores$AG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[2])))
-scores$V3 <- NULL
-names(scores) <- c('date','home.team','away.team','venue','home.score','away.score')
-scores$date <- unlist(lapply(str_split(scores$date,' '),function(x) paste(x[-1],collapse='')))
-scores$date <- as.Date(scores$date, "%d%B%Y")
-attr(scores$home.team,'levels') <- levels(factor(scores$home.team))
-attr(scores$away.team,'levels') <- levels(factor(scores$away.team))
-scores$venue <- as.character(scores$venue)
-teams <- scores[order(scores$date, decreasing=T) & !duplicated(scores$venue),][c('home.team','venue')]
-names(teams)[1] <- 'name'
-scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1, 0) # scoresa error:only 33 matches home ground among 380 matches
-rm(url, tbl, teams)
-save(scores, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-write.csv(scores, 'C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-
-# ===============================================================================
 library('shiny')
 library('shinyapps')
 library('devtools')
@@ -37,13 +5,16 @@ library('fbRanks')
 library('XML')
 library('plyr')
 library('dplyr')
+source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
 
-# Load soccer matches data
-#load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-#scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-scores <- create.fbRanks.dataframes('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
-names(teams)[1] <- 'name'
+# scrape EPL soccer matches from official website
+mydir <- 'C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/'
+scrapeEPL(season = '2013-2014', saveDir=mydir)
+
+# Load soccer matches dataframe in fbRanks class
+scores <- create.fbRanks.dataframes(paste0(mydir,'scores.csv'))
+teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]; names(teams)[1] <- 'name'
+teamslist <- as.list(teams$name); names(teamslist) <- teams$name
 
 # Dixon & Coles poisson model, we can also add some more effect like weather, pitch condition, home ground advantages etc.
 md1 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date))#, silent=T) #without other effects
@@ -91,21 +62,21 @@ md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score),
 
 # Simulate model 1
 # Example : predict a match kick-off on last match-day
-sim1 <- simulate(md1)
+#sim1 <- simulate(md1) # TOO SLOW, DONT RUN !!!
 predict(md1, date=as.Date(max(scores$scores$date)))
 pred1 <- predict(md1)
 save(pred1, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/pred1.Rda')
 
 # Simulate model 2
 # Example : predict a match kick-off at home ground on last match-day
-sim2 <- simulate(md2, hdv=1)
+#sim2 <- simulate(md2, hdv=1) # TOO SLOW, DONT RUN !!!
 predict(md2, hdv=1, date=as.Date(max(scores$scores$date)))
 pred2 <- predict(md2, hdv=1)
 save(pred2, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/pred2.Rda')
 
 # Simulate model 3
 # Example : predict a match kick-off at Cardiff City Stadium on last match-day
-sim3 <- simulate(md3, venue='Cardiff City Stadium')
+#sim3 <- simulate(md3, venue='Cardiff City Stadium') # TOO SLOW, DONT RUN !!!
 predict(md3, venue='Cardiff City Stadium', date=as.Date(max(scores$scores$date)))
 pred3 <- predict(md3, venue='Cardiff City Stadium')
 save(pred3, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/pred3.Rda')
@@ -128,7 +99,8 @@ head(pred2$scores)
 rsd1 <- residuals(md1)
 rsd2 <- residuals(md2)
 rsd3 <- residuals(md3)
-anova (md1,md2,md3, test='Chisq')
+#anova (md1,md2,md3, test='Chisq')
+rsd1
 
 attributes(rsd1)
 attributes(rsd2)
