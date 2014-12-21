@@ -1,10 +1,13 @@
-library('shiny')
-library('shinyapps')
-library('devtools')
-library('fbRanks')
-library('XML')
-library('plyr')
-library('dplyr')
+downloadNotInstalled<-function(x){ 
+  for(i in x){ 
+    if(!require(i,character.only=TRUE)){ 
+      install.packages(i,repos="http://cran.r-project.org") 
+      library(i,character.only=TRUE) 
+    } 
+  } 
+}
+requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML","plyr","dplyr") 
+downloadNotInstalled(requiredPackages) 
 source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
 
 # scrape EPL soccer matches from official website

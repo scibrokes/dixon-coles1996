@@ -1,15 +1,3 @@
-downloadNotInstalled<-function(x){ 
-  for(i in x){ 
-    if(!require(i,character.only=TRUE)){ 
-      install.packages(i,repos="http://cran.r-project.org") 
-      library(i,character.only=TRUE) 
-    } 
-  } 
-}
-requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML") 
-downloadNotInstalled(requiredPackages) 
-
-#------------------------------------------------
 # Load Dixon-Coles1996.R to scrap, manage and calculate data instanatly.
 source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
 
