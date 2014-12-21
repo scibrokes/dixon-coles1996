@@ -1,12 +1,14 @@
 # Example Shiny app
 ---------------------
 I simply write a shiny app to simulate the Dixon & Coles 1996 model :
+
 ```{r}
 shiny::runGitHub('Dixon-Coles1996', 'englianhu', subdir='knitr')
 shiny::runApp('GitHub/englianhu/Dixon-Coles1996/shiny', display.mode='showcase')
 ```
 
-Reference:
+Reference :
+
 -http://supstat.com.cn/blog/2014/12/03/a-simple-shiny-interface-to-retrieve-stock-information/
 -http://cran.r-project.org/web/packages/fbRanks/index.html
 -http://wiekvoet.blogspot.nl/2012/09/football-model.html
