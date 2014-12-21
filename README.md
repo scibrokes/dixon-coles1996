@@ -4,7 +4,7 @@ I simply write a shiny app to simulate the Dixon & Coles 1996 model :
 
 ```{r}
 shiny::runGitHub('Dixon-Coles1996', 'englianhu', subdir='knitr')
-shiny::runApp('GitHub/englianhu/Dixon-Coles1996/shiny', display.mode='showcase')
+shiny::runGitHub('Dixon-Coles1996', 'englianhu', subdir='shiny', display.mode='showcase')
 ```
 
 Reference :
