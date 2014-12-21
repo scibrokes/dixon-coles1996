@@ -1,5 +1,16 @@
-# Load Dixon-Coles1996.R to scrap, manage and calculate data instanatly.
-source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
+library("shiny")
+library("shinyapps")
+library("devtools")
+library("fbRanks")
+library("XML")
+library("plyr")
+library("dplyr")
+
+source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
+source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/loadDataShiny.R')
+
+# Load Dixon-Coles1996.R to scrap, manage and calculate data instantly (Refer to Dixon-Coles1996.R file)
+#' source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/Dixon-Coles1996.R')
 
 #------------------------------------------------
 # Define server logic required to summarize and view the selected dataset

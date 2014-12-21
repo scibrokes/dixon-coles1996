@@ -1,13 +1,20 @@
-downloadNotInstalled<-function(x){ 
-  for(i in x){ 
-    if(!require(i,character.only=TRUE)){ 
-      install.packages(i,repos="http://cran.r-project.org") 
-      library(i,character.only=TRUE) 
-    } 
-  } 
-}
-requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML","plyr","dplyr") 
-downloadNotInstalled(requiredPackages) 
+#' downloadNotInstalled<-function(x){ 
+#'   for(i in x){ 
+#'     if(!require(i,character.only=TRUE)){ 
+#'       install.packages(i,repos="http://cran.r-project.org") 
+#'       library(i,character.only=TRUE) 
+#'     } 
+#'   }
+#' }
+#' requiredPackages = c("shiny","shinyapps","devtools","fbRanks","XML","plyr","dplyr") 
+#' downloadNotInstalled(requiredPackages) 
+library("shiny")
+library("shinyapps")
+library("devtools")
+library("fbRanks")
+library("XML")
+library("plyr")
+library("dplyr")
 source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
 
 # scrape EPL soccer matches from official website
@@ -86,14 +93,14 @@ save(pred3, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Co
 
 # ===============================================================================
 # Preview the models
-attributes(pred1)
-head(pred1$scores)
+#' attributes(pred1)
+#' head(pred1$scores)
 
-attributes(pred2)
-head(pred2$scores)
+#' attributes(pred2)
+#' head(pred2$scores)
 
-attributes(pred2)
-head(pred2$scores)
+#' attributes(pred2)
+#' head(pred2$scores)
 
 # ===============================================================================
 # Apply anova to compare the models
@@ -103,11 +110,8 @@ rsd1 <- residuals(md1)
 rsd2 <- residuals(md2)
 rsd3 <- residuals(md3)
 #anova (md1,md2,md3, test='Chisq')
-rsd1
 
-attributes(rsd1)
-attributes(rsd2)
-attributes(rsd3)
+#' attributes(rsd1)
+#' attributes(rsd2)
+#' attributes(rsd3)
 
-# run shiny apps
-#runApp('Myapp', display.mode="showcase")
