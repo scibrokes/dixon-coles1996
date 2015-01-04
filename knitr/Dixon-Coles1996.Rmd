@@ -39,8 +39,8 @@ scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
 rm(url, tbl, teams)
-save(scores, file=paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda'))
-write.csv(scores, paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
+save(scores, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
+write.csv(scores, 'C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
 ```
 
 Load data and simulate the result
@@ -54,15 +54,15 @@ library(plyr)
 library(dplyr)
 
 # Load soccer matches data
-load(paste0(mydir,'/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda'))
-#scores <- read.csv(paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
-scores <- create.fbRanks.dataframes(paste0(mydir, '/GitHub/englianhu/Dixon-Coles1996/data/scores.csv'))
+load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
+#scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
+scores <- create.fbRanks.dataframes('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
 
 # Dixon & Coles poisson model, we can also add some more effect like weather, pitch condition, home ground advantages etc.
 md1 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T) #without other effects
-md2 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T) #with home team advantage
+md2 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T, add='hdv') #with home team advantage
 md3 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(scores$scores$date), silent=T, add='venue') #with venue effects
 
 # -------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ Apply anova to compare the models
 rsd1 <- residuals(md1)
 rsd2 <- residuals(md2)
 rsd3 <- residuals(md3)
-anova (md1,md2,md3, test='Chisq')
+#'anova (md1,md2,md3, test='Chisq')
 
 attributes(rsd1)
 attributes(rsd2)
