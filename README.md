@@ -1,6 +1,6 @@
 # Example Shiny app
 ---------------------
-I simply write a shiny app to simulate the Dixon & Coles 1996 model :
+I simply write a shiny app to simulate the Dixon & Coles 1996 model <http://rpubs.com/englianhu/Dixon-Coles1996> :
 
 ```{r}
 shiny::runGitHub('Dixon-Coles1996', 'englianhu', subdir='knitr')
