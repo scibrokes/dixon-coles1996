@@ -10,15 +10,17 @@
 #' downloadNotInstalled(requiredPackages) 
 library("shiny")
 library("shinyapps")
-library("devtools")
-library("fbRanks")
-library("XML")
-library("plyr")
-library("dplyr")
-source('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
+library(devtools)
+library(fbRanks)
+library(XML)
+library(plyr)
+library(dplyr)
+
+# load scrapeR function
+source('C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/function/scrapeEPL.R')
 
 # scrape EPL soccer matches from official website
-mydir <- 'C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/'
+mydir <- 'C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/'
 scrapeEPL(season = '2013-2014', saveDir=mydir)
 
 # Load soccer matches dataframe in fbRanks class

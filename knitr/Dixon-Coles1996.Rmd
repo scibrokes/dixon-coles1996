@@ -2,7 +2,7 @@
 title: "Dixon&Coles1996"
 author: "englianhu"
 date: "Friday, December 19, 2014"
-output: html_document
+output: pdf_document
 ---
 # Dixon-Coles 1996 Model
 
@@ -20,10 +20,10 @@ library(dplyr)
 
 # get the English Premier League 2013/2014 from official website
 url = getURL('http://www.premierleague.com/en-gb/matchday/results.html?paramClubId=ALL&paramComp_8=true&paramSeason=2013-2014&view=.scoresSeason')
-tbl <- readHTMLTable(htmlParse(url),header='text'); tbl[[length(tbl)]] <- NULL
-tbl <- lapply(tbl,function(x) {x$V1 = x$V1[1]; x[-1,]})
+tble <- readHTMLTable(htmlParse(url),header='text'); tble[[length(tble)]] <- NULL
+tble <- lapply(tble,function(x) {x$V1 = x$V1[1]; x[-1,]})
 scores <- Reduce(function(x, y) merge(x, y, all = T), 
-       tbl, accumulate = F)[1:5]
+       tble, accumulate = F)[1:5]
 scores$HG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[1])))
 scores$AG <- as.numeric(unlist(lapply(str_split(as.character(scores$V3),'-'),function(x) x[2])))
 scores$V3 <- NULL
@@ -38,9 +38,9 @@ names(teams)[1] <- 'name'
 scores$hdv <- ifelse(scores$home.team==teams$name & scores$venue==teams$venue, 1, 0) # scoresa error:only 33 matches home ground among 380 matches
 #match(scores$home.team,teams$name)
 #match(scores$venue,teams$venue)
-rm(url, tbl, teams)
-save(scores, file='C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-write.csv(scores, 'C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
+rm(url, tble, teams)
+save(scores, file='C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
+write.csv(scores, 'C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
 ```
 
 Load data and simulate the result
@@ -54,9 +54,9 @@ library(plyr)
 library(dplyr)
 
 # Load soccer matches data
-load('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
-#scores <- read.csv('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
-scores <- create.fbRanks.dataframes('C:/Users/Scibrokes Trading/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
+load('C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.Rda')
+#scores <- read.csv('C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
+scores <- create.fbRanks.dataframes('C:/Users/User/Documents/GitHub/englianhu/Dixon-Coles1996/data/scores.csv')
 teams <- scores$scores[order(scores$scores$date, decreasing=T) & !duplicated(scores$scores$venue),][c('home.team','venue')]
 names(teams)[1] <- 'name'
 
@@ -69,9 +69,9 @@ md3 <- rank.teams(scores$scores, min.date=min(scores$scores$date),max.date=max(s
 # model 1 measure the team attack and defence index.
 md1.att <- coef(md1$fit$cluster.1)[1:nrow(md1$teams)]
 md1.def <- coef(md1$fit$cluster.1)[-seq(1,nrow(md1$teams))]
-md1.tbl <- data.frame(coef(md1))[c(1:nrow(scores$teams)),-1]; names(md1.tbl) <- c('attack','defence')
-md1.tbl <- data.frame(team=sort(as.character(teams$name)),md1.tbl)
-md1.tbl$attack <- exp(md1.tbl$attack); md1.tbl$defence <- exp(md1.tbl$defence); row.names(md1.tbl) <- NULL
+md1.tble <- data.frame(coef(md1))[c(1:nrow(scores$teams)),-1]; names(md1.tble) <- c('attack','defence')
+md1.tble <- data.frame(team=sort(as.character(teams$name)),md1.tble)
+md1.tble$attack <- exp(md1.tble$attack); md1.tble$defence <- exp(md1.tble$defence); row.names(md1.tble) <- NULL
 md1.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
                 sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
 md1.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
@@ -81,9 +81,9 @@ md1.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score),
 md2.att <- coef(md2$fit$cluster.1)[1:nrow(md2$teams)]
 md2.def <- coef(md2$fit$cluster.1)[seq(nrow(md2$teams)+2,nrow(md2$teams)*2)-1]
 md2.hdv <- coef(md2$fit$cluster.1)[-seq(nrow(md2$teams)*2)+1]
-md2.tbl <- data.frame(coef(md2)$coef.list); names(md2.tbl) <- c('attack','defence','hdv')
-md2.tbl <- data.frame(team=sort(as.character(teams$name)),md2.tbl)
-md2.tbl$attack <- exp(md2.tbl$attack); md2.tbl$defence <- exp(md2.tbl$defence); row.names(md2.tbl) <- NULL
+md2.tble <- data.frame(coef(md2)$coef.list); names(md2.tble) <- c('attack','defence','hdv')
+md2.tble <- data.frame(team=sort(as.character(teams$name)),md2.tble)
+md2.tble$attack <- exp(md2.tble$attack); md2.tble$defence <- exp(md2.tble$defence); row.names(md2.tble) <- NULL
 md2.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
                 sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
 md2.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
@@ -93,9 +93,9 @@ md2.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score),
 md3.att <- coef(md3$fit$cluster.1)[1:nrow(md3$teams)]
 md3.def <- coef(md3$fit$cluster.1)[seq(nrow(md3$teams)+2,nrow(md3$teams)*2)-1]
 md3.hdv <- coef(md3$fit$cluster.1)[-seq(nrow(md3$teams)*2)+1]
-md3.tbl <- data.frame(coef(md3))[c(1:nrow(scores$teams)),-1]; names(md3.tbl) <- c('attack','defence')
-md3.tbl <- data.frame(team=sort(as.character(teams$name)), md3.tbl)
-md3.tbl$attack <- exp(md3.tbl$attack); md3.tbl$defence <- exp(md3.tbl$defence); row.names(md3.tbl) <- NULL
+md3.tble <- data.frame(coef(md3))[c(1:nrow(scores$teams)),-1]; names(md3.tble) <- c('attack','defence')
+md3.tble <- data.frame(team=sort(as.character(teams$name)), md3.tble)
+md3.tble$attack <- exp(md3.tble$attack); md3.tble$defence <- exp(md3.tble$defence); row.names(md3.tble) <- NULL
 md3.hm <- ddply(scores$scores, "home.team", summarise, scores = sum(home.score), mean = mean(home.score),
                 sd = sd(home.score), se = sd/sqrt(nrow(scores$scores)))
 md3.aw <- ddply(scores$scores, "away.team", summarise, scores = sum(away.score), mean  = mean(away.score),
